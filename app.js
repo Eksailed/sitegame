@@ -176,12 +176,18 @@
     const bare = v.version.replace(/\s*\(.*\)\s*$/, "");
     const [maj, min, patch] = bare.split(".");
     const num = patch === undefined ? bare : `${maj}.${min}<small>.${patch}</small>`;
+    const points = (v.improvements || []).map((p) => `<li>${richText(p)}</li>`).join("");
+    const hasMedia = Array.isArray(v.media) && v.media.length > 0;
+    // Записи, собранные из git игры, бывают без подробностей: раскрывать у них нечего
+    const expandable = Boolean(points || v.tech || hasMedia);
+
     const cls = [
       "entry",
       v.type === "patch" ? "is-patch" : "",
       v.milestone ? "is-milestone" : "",
       v.current ? "is-current" : "",
-      isOpen ? "is-open" : ""
+      expandable ? "" : "is-flat",
+      expandable && isOpen ? "is-open" : ""
     ]
       .filter(Boolean)
       .join(" ");
@@ -196,8 +202,6 @@
       .map((c) => `<span class="tag${c === "combat" ? " tag--combat" : ""}">${categoryNames[c] || c}</span>`)
       .join("");
 
-    const points = (v.improvements || []).map((p) => `<li>${richText(p)}</li>`).join("");
-    const hasMedia = Array.isArray(v.media) && v.media.length > 0;
     const media = hasMedia
       ? `<div class="media">${v.media
           .map(
@@ -210,7 +214,7 @@
       : "";
 
     return `<article class="${cls}" id="${id}">
-      <div class="entry__head" data-toggle="${v.version}">
+      <div class="entry__head"${expandable ? ` data-toggle="${v.version}"` : ""}>
         <div class="entry__ver">
           <span class="entry__num">${num}</span>
           ${stamp}
@@ -222,24 +226,28 @@
             <code>${v.commit}</code>
           </p>
           <h3 class="entry__title">
-            <button type="button" class="entry__toggle" aria-expanded="${isOpen}" aria-controls="${id}-body">${v.title}</button>
+            ${expandable ? `<button type="button" class="entry__toggle" aria-expanded="${isOpen}" aria-controls="${id}-body">${v.title}</button>` : `<span class="entry__toggle">${v.title}</span>`}
           </h3>
-          <p class="entry__sum">${richText(v.summary)}</p>
+          ${v.summary ? `<p class="entry__sum">${richText(v.summary)}</p>` : ""}
           <div class="tags">${tags}</div>
         </div>
         <span class="entry__chev" aria-hidden="true"></span>
       </div>
-      <div class="entry__body" id="${id}-body">
+      ${
+        expandable
+          ? `<div class="entry__body" id="${id}-body">
         <div class="entry__inner">
           <div class="entry__content${hasMedia ? " has-media" : ""}">
             <div>
-              <ul class="points">${points}</ul>
+              ${points ? `<ul class="points">${points}</ul>` : ""}
               ${v.tech ? `<div class="techbox"><span class="techbox__name">Файлы и проверки</span>${richText(v.tech)}</div>` : ""}
             </div>
             ${media}
           </div>
         </div>
-      </div>
+      </div>`
+          : ""
+      }
     </article>`;
   }
 

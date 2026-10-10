@@ -2207,3 +2207,12 @@ select.input {
 .snap { margin: 0 0 1.25rem; }
 .snap h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
 .snap p { margin: 0; opacity: 0.85; }
+
+/* Запись журнала без подробностей (собрана из git игры): раскрывать нечего */
+.entry.is-flat .entry__toggle {
+  cursor: default;
+}
+
+.entry.is-flat .entry__chev {
+  visibility: hidden;
+}
