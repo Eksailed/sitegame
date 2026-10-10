@@ -1,494 +1,489 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deadland — Официальный сайт и Полная история версий (v0.34.0)</title>
+  <title>Deadland — кооперативное выживание среди заражённых</title>
+  <meta name="description" content="Deadland: воксельное выживание от первого лица на Godot 4.7 .NET. Разрушаемый город «Ржавый Бор», первый крафт с голыми руками, до 8 игроков по локальной сети. Журнал всех версий." />
+  <meta name="theme-color" content="#191c16" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Deadland — кооперативное выживание среди заражённых" />
+  <meta property="og:description" content="Разрушаемый город, первый крафт с голыми руками, до 8 игроков по LAN. Журнал всех версий игры." />
+  <meta property="og:image" content="https://deadland.site/assets/site/og.jpg" />
+  <meta property="og:url" content="https://deadland.site/" />
   <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=PT+Mono&family=Sofia+Sans+Extra+Condensed:wght@600;800;900&display=swap" />
+  <link rel="preload" as="image" href="./assets/site/hero-street.webp" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Sticky Top HUD Bar -->
-  <header class="top-nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">
-        <img src="./icon.svg" alt="Deadland" class="brand-logo" />
-        <div>
-          DEADLAND
-          <span class="brand-sub">Voxel Survival • Godot 4.7 .NET</span>
-        </div>
+  <a class="skip" href="#main">Перейти к содержимому</a>
+
+  <header class="bar">
+    <div class="wrap bar__in">
+      <a href="#top" class="bar__mark" aria-label="Deadland, в начало страницы">
+        <img src="./icon.svg" alt="" width="22" height="22" />
+        <span>Deadland</span>
       </a>
-
-      <nav class="nav-links">
-        <a href="#changelog" class="nav-link active">История версий</a>
-        <a href="#benchmarks" class="nav-link">Оптимизация и До/После</a>
-        <a href="#craft-system" class="nav-link">Первый крафт и Добыча</a>
-        <a href="#gallery" class="nav-link">Скриншоты</a>
-        <a href="#roadmap" class="nav-link">Идеи механик (30)</a>
+      <nav class="bar__nav" aria-label="Разделы">
+        <a href="#journal">Журнал версий</a>
+        <a href="#perf">Оптимизация</a>
+        <a href="#craft">Крафт и добыча</a>
+        <a href="#frames">Кадры</a>
+        <a href="#ideas">Идеи</a>
       </nav>
-
-      <div class="nav-badges">
-        <div class="hud-pill" title="Движок и платформа">
-          <span class="dot"></span>
-          <span>Godot 4.7 C#</span>
-        </div>
-        <div class="hud-pill version-pill" title="Актуальная версия из файла VERSION">
-          <span>Version <span data-live-version>0.34.0</span></span>
-        </div>
-      </div>
+      <span class="bar__ver" title="Версия из файла VERSION">
+        <span class="lamp" aria-hidden="true"></span>
+        <span>v<span data-live-version>0.34.0</span></span>
+      </span>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="top">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <div class="hero-eyebrow">
-            <span>Кооперативное выживание от первого лица</span>
-            <span>•</span>
-            <span>Версия <strong data-live-version>0.34.0</strong></span>
-          </div>
-          <h1>
-            Хроника разработки <span>DEADLAND</span> от прототипа до <span data-live-version>0.34.0</span>
-          </h1>
-          <p class="hero-lead">
-            Собственная воксельная игра о выживании с нуля на <strong>Godot 4.7 .NET (C#)</strong>: разрушаемый город «Ржавый Бор» с 34 зданиями, старт без снаряжения и первый крафт, лепка персонажа по 134 ползункам, анимации CMU Motion Capture, локальная погода с грозами, строительство базы и умный ИИ зомби в кооперативе до 8 игроков.
-          </p>
-          <div class="hero-actions">
-            <a href="#changelog" class="btn btn-primary">Изучить все 36 версий по шагам ↓</a>
-            <a href="#craft-system" class="btn btn-secondary">Справочник добычи и крафта</a>
-            <a href="#benchmarks" class="btn btn-secondary">Замеры оптимизации</a>
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Godot 4.7 .NET 8 (C#)</span>
-            <span class="tech-tag">Windows • macOS • Linux</span>
-            <span class="tech-tag">LAN Co-op до 8 игроков</span>
-            <span class="tech-tag">Ветки: main / develop / lerk / Eksailed</span>
-            <span class="tech-tag">Save Format v4</span>
-          </div>
-        </div>
-
-        <div class="hero-showcase" data-lightbox-src="./docs/city/street.png" data-lightbox-caption="Город «Ржавый Бор» (Rusthaven Realistic) — тонкие стены 28 см, скатные крыши и PBR-материалы">
-          <img src="./docs/city/street.png" alt="Город Ржавый Бор в Deadland" />
-          <div class="hero-showcase-caption">
-            <span><strong>Город «Ржавый Бор»</strong> • 192×192 м + окраины 896×896 м</span>
-            <span>Нажмите для увеличения 🔍</span>
-          </div>
-        </div>
+  <main id="main">
+    <!-- Первый экран: ночная улица Ржавого Бора под фонариком -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__scene" id="hero-scene" aria-hidden="true">
+        <img class="hero__dark" src="./assets/site/hero-street.webp" alt="" />
+        <img class="hero__lit" src="./assets/site/hero-street.webp" alt="" />
       </div>
 
-      <!-- Key Metrics -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value rust">36 релизов</div>
-          <div class="stat-label">От прототипа 0.0 и 0.1.0 до актуальной версии <span data-live-version>0.34.0</span></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value moss">34 POI + 10 ферм</div>
-          <div class="stat-label">Здания «Ржавого Бора» и 20 процедурных сельских построек на окраинах</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value amber">134 ползунка</div>
-          <div class="stat-label">Морфы лица и тела MakeHuman + 16 зон интерактивной лепки мышью</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value sky">−56% треугольников</div>
-          <div class="stat-label">Сжатие сетки городских чанков (с 421 тыс. до 185 тыс.) и ускорение леса в 3,3×</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value rust">26 300+ объектов</div>
-          <div class="stat-label">Камни (19,9 тыс.), волокно (5,9 тыс.) и ветки (500+) на окраинах за 0,3 с</div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="wrap hero__in">
+        <p class="hero__place">Город Ржавый Бор. Электричества нет, связь только по локальной сети.</p>
+        <h1 class="hero__title" id="hero-title">Deadland</h1>
 
-  <!-- Main Changelog & Version Explorer -->
-  <section class="section" id="changelog">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Подробная история всех версий и улучшений</h2>
-          <p class="section-subtitle">
-            Каждое обновление Deadland с точным списком того, что было сделано, какие механики появились, какие ошибки и узкие места производительности были устранены.
-          </p>
-        </div>
-      </div>
-
-      <!-- Quick Jump Strip -->
-      <div class="version-jump-strip" id="version-jump-strip" aria-label="Быстрый переход к версии"></div>
-
-      <!-- Interactive Filter Toolbar -->
-      <div class="explorer-toolbar">
-        <div class="toolbar-top">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input
-              type="search"
-              id="version-search"
-              class="search-input"
-              placeholder="Поиск по версиям, механикам, файлам или коммитам (например: 0.30, зомби, топор, крыша, IK, чат)..."
-            />
-          </div>
-
-          <select id="author-filter" class="toolbar-select" aria-label="Фильтр по автору и ветке">
-            <option value="all">Все авторы (lerk &amp; Eksailed)</option>
-            <option value="lerk">Ветка / коммиты lerk</option>
-            <option value="Eksailed">Ветка / коммиты Eksailed</option>
-          </select>
-
-          <select id="sort-order" class="toolbar-select" aria-label="Порядок сортировки">
-            <option value="desc">Сначала новые (0.34.0 → 0.0)</option>
-            <option value="asc">Хронологически (0.0 → 0.34.0)</option>
-          </select>
-
-          <button type="button" id="expand-all-btn" class="toolbar-btn">Развернуть все</button>
-          <button type="button" id="collapse-all-btn" class="toolbar-btn">Свернуть все</button>
-        </div>
-
-        <div class="category-pills" id="category-pills"></div>
-
-        <div class="results-summary">
-          <span id="results-count">Загрузка истории версий...</span>
-          <span>Подсказка: кликните по заголовку любой версии, чтобы свернуть или развернуть подробный разбор изменений.</span>
-        </div>
-      </div>
-
-      <!-- Version Timeline Container -->
-      <div class="timeline" id="version-timeline"></div>
-    </div>
-  </section>
-
-  <!-- Performance Benchmarks & Visual Before/After Comparisons -->
-  <section class="section" id="benchmarks">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Инженерная оптимизация и сравнения «До / После»</h2>
-          <p class="section-subtitle">
-            Реальные замеры производительности из отчётов <code>docs/performance/0.20.1.md</code> и <code>docs/performance/0.30.1.md</code> (seed 4242, Godot 4.7 .NET) и исправления геометрии мира.
-          </p>
-        </div>
-      </div>
-
-      <div class="benchmarks-grid">
-        <div class="bench-card">
-          <div class="bench-header">
-            <span class="bench-title">Генерация лесного мира (0.20.1)</span>
-            <span class="bench-gain">Ускорение в 3,3×</span>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>До (0.20.0)</span><span>8 998 мс</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill before" style="width: 100%"></div></div>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>После кэша высот столбцов (0.20.1)</span><span>2 721 мс</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill after" style="width: 30.2%"></div></div>
-          </div>
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 10px;">
-            Кэширование высоты столбца чанка и точечная инвалидация при вскапывании земли или камня.
-          </p>
-        </div>
-
-        <div class="bench-card">
-          <div class="bench-header">
-            <span class="bench-title">Треугольники городских чанков (0.30.1)</span>
-            <span class="bench-gain">−56% треугольников</span>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>До объединения граней (0.30.0)</span><span>421 334 треуг.</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill before" style="width: 100%"></div></div>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>После жадного слияния (0.30.1)</span><span>185 182 треуг.</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill after" style="width: 43.9%"></div></div>
-          </div>
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 10px;">
-            Соседние плоские грани одного материала и нормали объединяются без потери поблочного разрушения.
-          </p>
-        </div>
-
-        <div class="bench-card">
-          <div class="bench-header">
-            <span class="bench-title">Примитивы рендера в кадре города (0.30.1)</span>
-            <span class="bench-gain">−67% примитивов</span>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>До (0.30.0, Forward+)</span><span>864 098</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill before" style="width: 100%"></div></div>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>После слияния и секторов 64×64 м (0.30.1)</span><span>282 365</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill after" style="width: 32.7%"></div></div>
-          </div>
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 10px;">
-            Разделение окраин на участки 64×64 м для отсечения камерой и теневыми каскадами + сон невидимых скелетов зомби.
-          </p>
-        </div>
-
-        <div class="bench-card">
-          <div class="bench-header">
-            <span class="bench-title">Вершины городских чанков (0.20.1 → 0.30.1)</span>
-            <span class="bench-gain">−59% от 0.20.0</span>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>Исходный город (0.20.0)</span><span>821 508 вершин</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill before" style="width: 100%"></div></div>
-          </div>
-          <div class="bench-bar-row">
-            <div class="bench-bar-label"><span>После 0.20.1 и 0.30.1</span><span>334 343 вершины</span></div>
-            <div class="bench-bar-track"><div class="bench-bar-fill after" style="width: 40.7%"></div></div>
-          </div>
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 10px;">
-            Двухэтапное сокращение: дедупликация вершин/нормалей в 0.20.1 и объединение плоских граней в 0.30.1.
-          </p>
-        </div>
-      </div>
-
-      <!-- Visual Before / After Cards -->
-      <div class="compare-pair-grid">
-        <div class="compare-card">
-          <h4>Стык границы города и окраин (исправлено в 0.20.2)</h4>
-          <p style="font-size: 0.86rem; color: var(--text-secondary);">
-            Устранение геометрической щели на отрицательных границах городской сетки и выравнивание примыкания рельефа пустыни.
-          </p>
-          <div class="compare-images">
-            <div class="compare-img-wrap" data-lightbox-src="./docs/world/seam-before.png" data-lightbox-caption="До 0.20.2: щель на стыке города и окраин">
-              <span class="compare-badge">ДО (0.20.1)</span>
-              <img src="./docs/world/seam-before.png" alt="Щель на границе города до 0.20.2" loading="lazy" />
-            </div>
-            <div class="compare-img-wrap" data-lightbox-src="./docs/world/seam-fixed.png" data-lightbox-caption="После 0.20.2: бесшовное примыкание границы города">
-              <span class="compare-badge" style="color: #8cd47e;">ПОСЛЕ (0.20.2)</span>
-              <img src="./docs/world/seam-fixed.png" alt="Закрытый шов в 0.20.2" loading="lazy" />
-            </div>
-          </div>
-        </div>
-
-        <div class="compare-card">
-          <h4>Сглаживание рельефа у процедурных ферм (0.19.0 → 0.20.0)</h4>
-          <p style="font-size: 0.86rem; color: var(--text-secondary);">
-            Переход от ступенчатого воксельного основания вокруг сельских участков к непрерывному гладкому плато с коллизией.
-          </p>
-          <div class="compare-images">
-            <div class="compare-img-wrap" data-lightbox-src="./docs/world/city-farm.png" data-lightbox-caption="Версия 0.19.0: первичная генерация фермы">
-              <span class="compare-badge">0.19.0</span>
-              <img src="./docs/world/city-farm.png" alt="Ферма в 0.19.0" loading="lazy" />
-            </div>
-            <div class="compare-img-wrap" data-lightbox-src="./docs/world/city-farm-smooth.png" data-lightbox-caption="Версия 0.20.0: непрерывный сглаженный рельеф вокруг участка">
-              <span class="compare-badge" style="color: #8cd47e;">0.20.0 (Гладкий рельеф)</span>
-              <img src="./docs/world/city-farm-smooth.png" alt="Сглаженная ферма в 0.20.0" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- First Craft, Items & Harvesting Reference -->
-  <section class="section" id="craft-system">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Система первого крафта, предметы и правила добычи (0.28.0–0.33.0)</h2>
-          <p class="section-subtitle">
-            Выживший появляется в мире без снаряжения. Камни, ветки и волокно собираются руками по <code>F</code>, а объёмные модели всех 14 предметов в реальных размерах лежат на широкой грани и удерживаются серединой ладони.
-          </p>
-        </div>
-      </div>
-
-      <div class="items-grid" id="items-catalog"></div>
-
-      <!-- Harvesting & Crafting Tables -->
-      <div class="compare-pair-grid">
-        <div>
-          <h3 style="margin-bottom: 12px; font-size: 1.15rem;">Таблица добычи ресурсов (<code>HarvestRules.cs</code>)</h3>
-          <div class="data-table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Источник в мире</th>
-                  <th>Способ</th>
-                  <th>Время</th>
-                  <th>Выход и запас</th>
-                  <th>Стамина</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Отдельный камень / валежник / сучья</strong></td>
-                  <td><code>F</code> (нажатие)</td>
-                  <td>0,5 с</td>
-                  <td>1 камень / 1 ветка (объект исчезает)</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td><strong>Сухая ветка на живом дереве</strong></td>
-                  <td><code>F</code> (удержание)</td>
-                  <td>1,5 с</td>
-                  <td>1 ветка (до 2 шт. с дерева)</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <td><strong>Волокнистое растение (руками)</strong></td>
-                  <td><code>F</code> (удержание)</td>
-                  <td>2,0 с</td>
-                  <td>1 волокно (куст изорван целиком)</td>
-                  <td>4</td>
-                </tr>
-                <tr>
-                  <td><strong>Волокнистое растение (резаком)</strong></td>
-                  <td>Резак, <code>ЛКМ</code></td>
-                  <td>0,8 с / шт.</td>
-                  <td>3 пучка волокна (остаются пеньки)</td>
-                  <td>4 / шт.</td>
-                </tr>
-                <tr>
-                  <td><strong>Ствол взрослого дерева</strong></td>
-                  <td>Топор, <code>ЛКМ</code></td>
-                  <td>9 ударов (~8 с)</td>
-                  <td>Дерево падает (урон 60 ствол / 20 крона) + 2–3 сучка</td>
-                  <td>7 / удар</td>
-                </tr>
-                <tr>
-                  <td><strong>Поваленное бревно</strong></td>
-                  <td>Топор, <code>ЛКМ</code></td>
-                  <td>0,9 с / удар</td>
-                  <td>1 полено за удар (всего 6 поленьев)</td>
-                  <td>7 / удар</td>
-                </tr>
-                <tr>
-                  <td><strong>Крона лежащего дерева / кусты / грядки</strong></td>
-                  <td>Резак, <code>ЛКМ</code></td>
-                  <td>1,0 с</td>
-                  <td>Листва (4 пучка с верхушки дерева)</td>
-                  <td>7</td>
-                </tr>
-                <tr>
-                  <td><strong>Участок почвы (2×2 м)</strong></td>
-                  <td>Копалка, <code>ЛКМ</code></td>
-                  <td>1,8 с</td>
-                  <td>1 земля (запас 6 ед. с участка)</td>
-                  <td>7</td>
-                </tr>
-                <tr>
-                  <td><strong>Куча металлолома</strong></td>
-                  <td><code>F</code> (удержание)</td>
-                  <td>3,0 с</td>
-                  <td>1 металлолом (запас 5 ед.)</td>
-                  <td>7</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div>
-          <h3 style="margin-bottom: 12px; font-size: 1.15rem;">Цепочка рецептов первого крафта и строительство</h3>
-          <div class="data-table-wrap" style="margin-bottom: 18px;">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Создаваемый предмет</th>
-                  <th>Расходуемые материалы</th>
-                  <th>Инструмент (не тратится)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Каменный резак</strong> (<code>stone_cutter</code>)</td>
-                  <td>1 × Камень</td>
-                  <td>Ещё 1 × Камень (как отбойник)</td>
-                </tr>
-                <tr>
-                  <td><strong>Шнур</strong> (<code>cord</code>)</td>
-                  <td>3 × Растительное волокно</td>
-                  <td>— (скручивается руками)</td>
-                </tr>
-                <tr>
-                  <td><strong>Каменный топор</strong> (<code>stone_axe</code>)</td>
-                  <td>1 × Камень + 1 × Ветка + 1 × Шнур</td>
-                  <td>Каменный резак</td>
-                </tr>
-                <tr>
-                  <td><strong>Палка-копалка</strong> (<code>digging_stick</code>)</td>
-                  <td>1 × Ветка</td>
-                  <td>Каменный резак</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bench-card">
-            <h4 style="margin-bottom: 8px;">Строительство и укрепление базы (<code>B</code> — режим, 0.30.0+)</h4>
-            <p style="font-size: 0.88rem; color: var(--text-secondary);">
-              • <strong>Управление:</strong> <code>B</code> — включить предпросмотр, <code>R</code> — выбрать семейство материала (Дерево / Камень / Металл), <code>G</code> — переключить действие (Установка / Укрепление ступени / Накладка на грань / Разбор), <code>ЛКМ</code> — выполнить.<br />
-              • <strong>Правило фиксированного материала:</strong> каждая основа имеет 2 ступени прочности внутри своего семейства; смена материала требует разбора (топором, с возвратом до 50% ресурсов).<br />
-              • <strong>Защитные накладки:</strong> ставятся отдельно на любую из 6 граней блока и первыми принимают на себя удары зомби с этой стороны.
+        <div class="hero__row">
+          <div class="hero__text">
+            <p class="hero__lead">
+              Кооперативное выживание от первого лица на Godot 4.7 .NET. Город из 34 зданий разбирается по блоку,
+              начинать приходится с голыми руками, а по улицам бродят заражённые. Играть можно одному или
+              вместе, до 8 человек по локальной сети.
             </p>
+            <div class="hero__actions">
+              <a href="#journal" class="btn btn--signal">Открыть журнал версий</a>
+              <a href="#frames" class="btn btn--ghost">Посмотреть кадры из игры</a>
+            </div>
+          </div>
+
+          <div class="daycount" aria-label="Счётчик дней разработки">
+            <span class="daycount__label">День</span>
+            <span class="daycount__num" data-day-count>3</span>
+            <span class="daycount__note">с первого коммита<br /><span data-day-start>8 октября 2026</span></span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Visual Screenshot Gallery -->
-  <section class="section" id="gallery">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Галерея мира, архитектуры и персонажей</h2>
-          <p class="section-subtitle">
-            Настоящие внутриигровые кадры из Godot 4.7 и рендеры систем лепки персонажа. Нажмите на любой снимок для полноэкранного просмотра.
+      <div class="wrap hero__brief">
+      <dl class="brief">
+        <div><dt data-count-label="versions">версий в журнале</dt><dd data-count="versions">56</dd></div>
+        <div><dt>здания в городе и 10 ферм</dt><dd>34</dd></div>
+        <div><dt>игроков по LAN</dt><dd>до 8</dd></div>
+        <div><dt data-count-label="items">предметов первого крафта</dt><dd data-count="items">14</dd></div>
+        <div><dt>ползунка лепки лица и тела</dt><dd>134</dd></div>
+      </dl>
+      </div>
+      <div class="tape" aria-hidden="true"></div>
+    </section>
+
+    <!-- Журнал версий -->
+    <section class="sec" id="journal" aria-labelledby="journal-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="journal-title">Журнал версий</h2>
+          <p>
+            Что менялось в каждой сборке: механики, исправления, файлы и проверки. Записи идут по дням разработки,
+            от прототипа 0.0 до <span data-live-version>0.34.0</span>. Нажмите на запись, чтобы раскрыть подробности.
           </p>
+        </header>
+
+        <div class="journal">
+          <aside class="tools" aria-label="Фильтры журнала">
+            <label class="field">
+              <span class="field__name">Поиск</span>
+              <input type="search" id="version-search" class="input" placeholder="зомби, топор, крыша, 0.30" autocomplete="off" />
+            </label>
+
+            <fieldset class="field">
+              <legend class="field__name">Раздел</legend>
+              <div class="cats" id="category-pills"></div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__name">Автор</legend>
+              <div class="seg" id="author-seg">
+                <button type="button" data-author="all" aria-pressed="true">Все</button>
+                <button type="button" data-author="lerk" aria-pressed="false">lerk</button>
+                <button type="button" data-author="Eksailed" aria-pressed="false">Eksailed</button>
+              </div>
+            </fieldset>
+
+            <div class="field field--pair">
+              <label>
+                <span class="field__name">Порядок</span>
+                <select id="sort-order" class="input">
+                  <option value="desc">Сначала новые</option>
+                  <option value="asc">С самого начала</option>
+                </select>
+              </label>
+              <label>
+                <span class="field__name">Версия</span>
+                <select id="version-jump" class="input" aria-label="Перейти к версии"></select>
+              </label>
+            </div>
+
+            <div class="tools__row">
+              <button type="button" id="expand-all-btn" class="btn btn--small">Развернуть все</button>
+              <button type="button" id="collapse-all-btn" class="btn btn--small">Свернуть все</button>
+            </div>
+
+            <p class="tools__count" id="results-count" aria-live="polite">Загружаю журнал…</p>
+          </aside>
+
+          <div class="log" id="version-timeline" data-lb-group></div>
         </div>
       </div>
+    </section>
 
-      <div class="gallery-grid" id="gallery-grid"></div>
-    </div>
-  </section>
-
-  <!-- Roadmap & 30 Mechanic Ideas -->
-  <section class="section" id="roadmap">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Банк из 30 авторских идей механик и план к Демо 2027</h2>
-          <p class="section-subtitle">
-            Полный реестр спроектированных систем из <code>docs/идеи-механик/</code> и утверждённой архитектуры одежды первого этапа (<code>docs/одежда-первый-этап.md</code>). Часть идей уже воплощена в коде версий 0.27.0–0.33.0.
+    <!-- Оптимизация -->
+    <section class="sec sec--plate" id="perf" aria-labelledby="perf-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="perf-title">Оптимизация</h2>
+          <p>
+            Замеры из отчётов <code>docs/performance/0.20.1.md</code> и <code>docs/performance/0.30.1.md</code>,
+            seed 4242, Godot 4.7 .NET. Ржавая полоса показывает, как было, полоса хаки показывает, как стало.
           </p>
+        </header>
+
+        <div class="gauges">
+          <article class="gauge">
+            <header class="gauge__head">
+              <h3>Генерация лесного мира</h3>
+              <strong class="gauge__gain">в 3,3 раза быстрее</strong>
+            </header>
+            <div class="gauge__row is-before" style="--w: 100%">
+              <span class="gauge__what">0.20.0</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="8998">8 998 мс</data>
+            </div>
+            <div class="gauge__row is-after" style="--w: 30.2%">
+              <span class="gauge__what">0.20.1</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="2721">2 721 мс</data>
+            </div>
+            <p class="gauge__note">Высота столбца чанка кэшируется и сбрасывается точечно, когда игрок копает землю или камень.</p>
+          </article>
+
+          <article class="gauge">
+            <header class="gauge__head">
+              <h3>Треугольники городских чанков</h3>
+              <strong class="gauge__gain">на 56% меньше</strong>
+            </header>
+            <div class="gauge__row is-before" style="--w: 100%">
+              <span class="gauge__what">0.30.0</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="421334">421 334</data>
+            </div>
+            <div class="gauge__row is-after" style="--w: 43.9%">
+              <span class="gauge__what">0.30.1</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="185182">185 182</data>
+            </div>
+            <p class="gauge__note">Соседние плоские грани одного материала сливаются в одну, а блоки всё так же разрушаются по одному.</p>
+          </article>
+
+          <article class="gauge">
+            <header class="gauge__head">
+              <h3>Примитивы в кадре города</h3>
+              <strong class="gauge__gain">на 67% меньше</strong>
+            </header>
+            <div class="gauge__row is-before" style="--w: 100%">
+              <span class="gauge__what">0.30.0</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="864098">864 098</data>
+            </div>
+            <div class="gauge__row is-after" style="--w: 32.7%">
+              <span class="gauge__what">0.30.1</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="282365">282 365</data>
+            </div>
+            <p class="gauge__note">Окраины поделены на участки 64×64 м, камера и каскады теней отсекают лишнее, скелеты невидимых зомби засыпают.</p>
+          </article>
+
+          <article class="gauge">
+            <header class="gauge__head">
+              <h3>Вершины городских чанков</h3>
+              <strong class="gauge__gain">на 59% меньше</strong>
+            </header>
+            <div class="gauge__row is-before" style="--w: 100%">
+              <span class="gauge__what">0.20.0</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="821508">821 508</data>
+            </div>
+            <div class="gauge__row is-after" style="--w: 40.7%">
+              <span class="gauge__what">0.30.1</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="334343">334 343</data>
+            </div>
+            <p class="gauge__note">В два захода: в 0.20.1 убраны дубли вершин и нормалей, в 0.30.1 слиты плоские грани.</p>
+          </article>
+        </div>
+
+        <div class="compares">
+          <figure class="cmp">
+            <div class="cmp__stage" style="--pos: 50%">
+              <img class="cmp__after" src="./assets/site/thumbs/docs__world__seam-fixed.webp" data-full="./docs/world/seam-fixed.png" alt="Версия 0.20.2: город и окраины примыкают без щели" loading="lazy" />
+              <div class="cmp__before">
+                <img src="./assets/site/thumbs/docs__world__seam-before.webp" data-full="./docs/world/seam-before.png" alt="Версия 0.20.1: щель на стыке города и окраин" loading="lazy" />
+              </div>
+              <span class="cmp__tag cmp__tag--before">0.20.1, до</span>
+              <span class="cmp__tag cmp__tag--after">0.20.2, после</span>
+              <span class="cmp__handle" aria-hidden="true"></span>
+              <input class="cmp__range" type="range" min="0" max="100" value="50" aria-label="Сдвиньте, чтобы сравнить кадры до и после исправления шва" />
+            </div>
+            <figcaption>
+              <h3>Шов между городом и окраинами</h3>
+              <p>На отрицательных границах городской сетки оставалась щель. В 0.20.2 рельеф пустыни выровнен и примыкает вплотную.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="cmp">
+            <div class="cmp__stage" style="--pos: 50%">
+              <img class="cmp__after" src="./assets/site/thumbs/docs__world__city-farm-smooth.webp" data-full="./docs/world/city-farm-smooth.png" alt="Версия 0.20.0: гладкое плато вокруг фермы" loading="lazy" />
+              <div class="cmp__before">
+                <img src="./assets/site/thumbs/docs__world__city-farm.webp" data-full="./docs/world/city-farm.png" alt="Версия 0.19.0: ступенчатое основание вокруг фермы" loading="lazy" />
+              </div>
+              <span class="cmp__tag cmp__tag--before">0.19.0, до</span>
+              <span class="cmp__tag cmp__tag--after">0.20.0, после</span>
+              <span class="cmp__handle" aria-hidden="true"></span>
+              <input class="cmp__range" type="range" min="0" max="100" value="50" aria-label="Сдвиньте, чтобы сравнить рельеф фермы до и после сглаживания" />
+            </div>
+            <figcaption>
+              <h3>Рельеф вокруг ферм</h3>
+              <p>Ступенчатое воксельное основание сельских участков стало непрерывным гладким плато с коллизией.</p>
+            </figcaption>
+          </figure>
         </div>
       </div>
+    </section>
 
-      <div class="ideas-grid" id="ideas-grid"></div>
-    </div>
-  </section>
+    <!-- Крафт и добыча -->
+    <section class="sec" id="craft" aria-labelledby="craft-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="craft-title">Крафт и добыча</h2>
+          <p>
+            Выживший появляется без снаряжения. Камни, ветки и волокно собираются руками по <kbd>F</kbd>,
+            из них получаются первые инструменты. Все 14 предметов сделаны в настоящих размерах и лежат в ладони
+            серединой. Версии 0.28.0–0.33.0.
+          </p>
+        </header>
 
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img" />
-      <div class="lightbox-bar">
-        <span id="lightbox-caption" style="color: var(--text-primary); font-size: 0.92rem;"></span>
-        <button type="button" class="lightbox-close" id="lightbox-close">Закрыть (Esc)</button>
-      </div>
-    </div>
-  </div>
+        <div class="inv">
+          <div class="inv__grid" id="items-catalog" role="group" aria-label="Предметы первого крафта"></div>
+          <div class="inv__card" id="item-detail" aria-live="polite"></div>
+        </div>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong>DEADLAND</strong> • Воксельное кооперативное выживание на Godot 4.7 .NET (C#) • Авторы: <code>lerk</code> и <code>Eksailed</code>
+        <h3 class="sub">Цепочка первого крафта</h3>
+        <ol class="recipes">
+          <li class="recipe">
+            <div class="recipe__in">
+              <span class="chip"><img src="./assets/textures/items/stone.svg" alt="" />Камень</span>
+            </div>
+            <div class="recipe__tool">второй камень как отбойник</div>
+            <div class="recipe__out">
+              <span class="chip chip--out"><img src="./assets/textures/items/stone_cutter.svg" alt="" />Каменный резак</span>
+            </div>
+          </li>
+          <li class="recipe">
+            <div class="recipe__in">
+              <span class="chip"><img src="./assets/textures/items/fiber.svg" alt="" />Волокно ×3</span>
+            </div>
+            <div class="recipe__tool">скручивается руками</div>
+            <div class="recipe__out">
+              <span class="chip chip--out"><img src="./assets/textures/items/cord.svg" alt="" />Шнур</span>
+            </div>
+          </li>
+          <li class="recipe">
+            <div class="recipe__in">
+              <span class="chip"><img src="./assets/textures/items/stone.svg" alt="" />Камень</span>
+              <span class="chip"><img src="./assets/textures/items/branch.svg" alt="" />Ветка</span>
+              <span class="chip"><img src="./assets/textures/items/cord.svg" alt="" />Шнур</span>
+            </div>
+            <div class="recipe__tool">нужен каменный резак, он не тратится</div>
+            <div class="recipe__out">
+              <span class="chip chip--out"><img src="./assets/textures/items/stone_axe.png" alt="" />Каменный топор</span>
+            </div>
+          </li>
+          <li class="recipe">
+            <div class="recipe__in">
+              <span class="chip"><img src="./assets/textures/items/branch.svg" alt="" />Ветка</span>
+            </div>
+            <div class="recipe__tool">выстругивается каменным резаком</div>
+            <div class="recipe__out">
+              <span class="chip chip--out"><img src="./assets/textures/items/digging_stick.svg" alt="" />Палка-копалка</span>
+            </div>
+          </li>
+        </ol>
+
+        <div class="craft-cols">
+          <div>
+            <h3 class="sub">Что и чем добывается</h3>
+            <p class="sub__note">Правила из <code>HarvestRules.cs</code>.</p>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Таблица добычи ресурсов">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Источник</th>
+                    <th scope="col">Чем</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">Что получаешь</th>
+                    <th scope="col">Выносл.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Камень, валежник, сучья на земле</th>
+                    <td><kbd>F</kbd></td>
+                    <td>0,5 с</td>
+                    <td>1 камень или 1 ветка, предмет исчезает</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Сухая ветка на живом дереве</th>
+                    <td>держать <kbd>F</kbd></td>
+                    <td>1,5 с</td>
+                    <td>1 ветка, до 2 с дерева</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Волокнистое растение</th>
+                    <td>держать <kbd>F</kbd></td>
+                    <td>2,0 с</td>
+                    <td>1 волокно, куст вырван целиком</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Волокнистое растение</th>
+                    <td>резак, <kbd>ЛКМ</kbd></td>
+                    <td>0,8 с за пучок</td>
+                    <td>3 пучка волокна, остаются пеньки</td>
+                    <td>4 за пучок</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Ствол взрослого дерева</th>
+                    <td>топор, <kbd>ЛКМ</kbd></td>
+                    <td>9 ударов, около 8 с</td>
+                    <td>дерево падает (урон 60 стволом, 20 кроной) и даёт 2–3 сучка</td>
+                    <td>7 за удар</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Поваленное бревно</th>
+                    <td>топор, <kbd>ЛКМ</kbd></td>
+                    <td>0,9 с за удар</td>
+                    <td>1 полено за удар, всего 6</td>
+                    <td>7 за удар</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Крона лежащего дерева, кусты, грядки</th>
+                    <td>резак, <kbd>ЛКМ</kbd></td>
+                    <td>1,0 с</td>
+                    <td>листва, 4 пучка с верхушки дерева</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Участок почвы 2×2 м</th>
+                    <td>копалка, <kbd>ЛКМ</kbd></td>
+                    <td>1,8 с</td>
+                    <td>1 земля, запас участка 6</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Куча металлолома</th>
+                    <td>держать <kbd>F</kbd></td>
+                    <td>3,0 с</td>
+                    <td>1 металлолом, запас кучи 5</td>
+                    <td>7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="build">
+            <h3 class="sub">Строительство базы</h3>
+            <p class="sub__note">Режим стройки с версии 0.30.0.</p>
+            <dl class="keys">
+              <div><dt><kbd>B</kbd></dt><dd>включить предпросмотр постройки</dd></div>
+              <div><dt><kbd>R</kbd></dt><dd>выбрать материал: дерево, камень или металл</dd></div>
+              <div><dt><kbd>G</kbd></dt><dd>сменить действие: поставить, укрепить, наложить на грань, разобрать</dd></div>
+              <div><dt><kbd>ЛКМ</kbd></dt><dd>выполнить</dd></div>
+            </dl>
+            <p>
+              Материал основы не меняется. У каждого семейства две ступени прочности, а чтобы перейти с дерева на камень,
+              блок разбирают топором и получают обратно до половины ресурсов.
+            </p>
+            <p>
+              Защитная накладка ставится на любую из шести граней блока и первой принимает удары зомби с этой стороны.
+            </p>
+          </aside>
+        </div>
       </div>
-      <div>
-        Единый источник версии: файл <code>VERSION</code> (<strong data-live-version>0.34.0</strong>)
+    </section>
+
+    <!-- Кадры -->
+    <section class="sec sec--plate" id="frames" aria-labelledby="frames-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="frames-title">Кадры из игры</h2>
+          <p>Снимки из Godot 4.7 и рендеры лепки персонажа. Нажмите на кадр, чтобы открыть его целиком, стрелками можно листать.</p>
+        </header>
+        <div class="frames" id="gallery-grid" data-lb-group></div>
       </div>
+    </section>
+
+    <!-- Идеи механик -->
+    <section class="sec" id="ideas" aria-labelledby="ideas-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="ideas-title">Идеи механик</h2>
+          <p>
+            Тридцать идей из <code>docs/идеи-механик/</code> и план одежды первого этапа к демо 2027 года.
+            Часть уже в игре с версий 0.27.0–0.33.0.
+          </p>
+        </header>
+        <div class="seg seg--wide" id="ideas-filter" role="group" aria-label="Фильтр идей по статусу"></div>
+        <ol class="ideas" id="ideas-grid"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="wrap foot__in">
+      <p class="foot__mark">Deadland</p>
+      <p>Кооперативное выживание на Godot 4.7 .NET. Делают lerk и Eksailed.</p>
+      <p>Номер версии сайт берёт из файла <code>VERSION</code>: сейчас <strong data-live-version>0.34.0</strong>.</p>
     </div>
   </footer>
+
+  <dialog class="lb" id="lightbox" aria-label="Просмотр кадра">
+    <figure class="lb__fig">
+      <img src="" alt="" id="lightbox-img" />
+      <figcaption class="lb__bar">
+        <span class="lb__count" id="lightbox-count"></span>
+        <span class="lb__cap" id="lightbox-caption"></span>
+        <span class="lb__btns">
+          <button type="button" class="btn btn--small" id="lightbox-prev" aria-label="Предыдущий кадр">Назад</button>
+          <button type="button" class="btn btn--small" id="lightbox-next" aria-label="Следующий кадр">Дальше</button>
+          <button type="button" class="btn btn--small btn--signal" id="lightbox-close" autofocus>Закрыть</button>
+        </span>
+      </figcaption>
+    </figure>
+  </dialog>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
-
