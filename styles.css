@@ -2189,3 +2189,21 @@ select.input {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* SEO: текст для читалок и роботов, который не рисуется глазами */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* SEO: слепок журнала и идей до запуска скрипта, app.js заменяет его целиком */
+.snap { margin: 0 0 1.25rem; }
+.snap h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
+.snap p { margin: 0; opacity: 0.85; }
