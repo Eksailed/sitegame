@@ -625,7 +625,21 @@
     });
   }
 
+  // Нажатие на кнопку бота закрытого теста пишем в Метрику целью tg_test (если счётчик загрузился).
+  function initGoals() {
+    document.querySelectorAll("[data-goal]").forEach((el) => {
+      el.addEventListener("click", () => {
+        try {
+          if (typeof window.ym === "function") window.ym(113599733, "reachGoal", el.dataset.goal);
+        } catch (e) {
+          /* счётчик не должен ломать переход */
+        }
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    initGoals();
     loadLiveVersion();
     renderCounters();
     initJournal();

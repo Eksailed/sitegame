@@ -208,6 +208,131 @@ strong {
   font-size: 1.02rem;
 }
 
+/* ---------- Закрытый тест ---------- */
+
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--shov);
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.step {
+  padding: 22px 24px 26px;
+  border-left: 1px solid var(--shov);
+}
+
+.step:first-child {
+  border-left: 0;
+}
+
+.step__num {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 4.4rem;
+  line-height: 0.8;
+  color: var(--signal);
+}
+
+.step__t {
+  margin-bottom: 8px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.step p {
+  max-width: 34ch;
+  color: var(--pyl);
+  text-wrap: pretty;
+}
+
+.testcols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px clamp(24px, 5vw, 72px);
+  margin-top: clamp(32px, 5vw, 56px);
+}
+
+.facts {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.facts li {
+  position: relative;
+  padding-left: 24px;
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+.facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 12px;
+  height: 2px;
+  background: var(--signal);
+}
+
+.facts--warn li::before {
+  background: var(--rust-text);
+}
+
+.testcta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: clamp(32px, 5vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--shov);
+}
+
+.btn--big {
+  min-height: 58px;
+  padding: 0.7em 1.6em;
+  font-size: 1.5rem;
+}
+
+.testcta__note {
+  max-width: 56ch;
+  color: var(--pyl);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 860px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step {
+    border-left: 0;
+    border-top: 1px solid var(--shov);
+  }
+
+  .step:first-child {
+    border-top: 0;
+  }
+
+  .testcols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .testcta .btn {
+    width: 100%;
+  }
+}
+
 /* ---------- Верхняя полоса ---------- */
 
 .bar {

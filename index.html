@@ -110,6 +110,7 @@
         <span>Deadland</span>
       </a>
       <nav class="bar__nav" aria-label="Разделы">
+        <a href="#test">Закрытый тест</a>
         <a href="#journal">Журнал версий</a>
         <a href="#perf">Оптимизация</a>
         <a href="#craft">Крафт и добыча</a>
@@ -143,7 +144,8 @@
               вместе, до 8 человек по локальной сети.
             </p>
             <div class="hero__actions">
-              <a href="#journal" class="btn btn--signal">Открыть журнал версий</a>
+              <a href="https://t.me/deadland_game_bot?start=site" class="btn btn--signal" data-goal="tg_test" rel="noopener">Попасть в закрытый тест</a>
+              <a href="#journal" class="btn btn--ghost">Открыть журнал версий</a>
               <a href="#frames" class="btn btn--ghost">Посмотреть кадры из игры</a>
             </div>
           </div>
@@ -166,6 +168,65 @@
       </dl>
       </div>
       <div class="tape" aria-hidden="true"></div>
+    </section>
+
+    <!-- Закрытый тест -->
+    <section class="sec sec--plate" id="test" aria-labelledby="test-title">
+      <div class="wrap">
+        <header class="sec__head">
+          <h2 id="test-title">Закрытый тест</h2>
+          <p>
+            Поиграть можно уже сейчас: игру раздаёт Telegram-бот. Откройте бота, выберите систему и получите
+            сборку. Она ранняя, поэтому мы ждём ваши отчёты о вылетах и багах.
+          </p>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num" aria-hidden="true">1</span>
+            <h3 class="step__t">Откройте бота</h3>
+            <p>Нажмите кнопку ниже и в Telegram жмите «Запустить». Регистрация не нужна.</p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">2</span>
+            <h3 class="step__t">Выберите систему</h3>
+            <p>Windows 10 или 11, либо Mac на Apple Silicon. Бот пришлёт архив около 1,2 ГБ.</p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">3</span>
+            <h3 class="step__t">Распакуйте и играйте</h3>
+            <p>Игра пока без цифровой подписи. Бот покажет, как убрать предупреждение системы.</p>
+          </li>
+        </ol>
+
+        <div class="testcols">
+          <div>
+            <h3 class="sub">Что нужно</h3>
+            <ul class="facts">
+              <li>Windows 10 или 11, либо Mac на процессоре Apple (M1 и новее). Mac на Intel пока не поддерживаются.</li>
+              <li>Около 1,2 ГБ на скачивание и 3 ГБ свободного места на диске.</li>
+              <li>Telegram на телефоне или компьютере, чтобы открыть бота.</li>
+              <li>Встроенной видеокарты хватит, но возможны тормоза.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="sub">Что учесть</h3>
+            <ul class="facts facts--warn">
+              <li>Сборка ранняя: бывают вылеты и баги, а сохранённый мир может сброситься при обновлении.</li>
+              <li>Играть можно одному или по локальной сети, до 8 человек. По интернету вместе пока нельзя.</li>
+              <li>О проблемах пишите боту командой <code>/bug</code>: он передаст отчёт разработчикам и ответит вам.</li>
+              <li>Новые версии бот присылает сам, рассылку можно выключить командой <code>/mute</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="testcta">
+          <a href="https://t.me/deadland_game_bot?start=site" class="btn btn--signal btn--big" data-goal="tg_test" rel="noopener">Открыть бота в Telegram</a>
+          <p class="testcta__note">
+            Бот хранит ваш Telegram-id, ник и выбранную систему, чтобы присылать новые версии и разбирать отчёты.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Журнал версий -->
