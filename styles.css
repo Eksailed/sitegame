@@ -333,6 +333,57 @@ strong {
   }
 }
 
+/* ---------- Как устроена игра ---------- */
+
+.sysmap {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--shov);
+  background: var(--shov);
+}
+
+.sys {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px 22px;
+  background: var(--bronya);
+}
+
+.sys__t {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.sys p {
+  color: var(--pyl);
+  text-wrap: pretty;
+}
+
+.sys__code {
+  margin-top: auto;
+  padding-top: 6px;
+  color: var(--signal);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1100px) {
+  .sysmap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .sysmap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ---------- Верхняя полоса ---------- */
 
 .bar {
