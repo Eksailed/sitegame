@@ -1139,32 +1139,8 @@ select.input {
   color: var(--izvest);
 }
 
-.techbox {
-  margin-top: 20px;
-  padding: 14px 16px;
-  background: var(--bronya);
-  border-left: 3px solid var(--shov-2);
-  font-family: var(--f-mono);
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--pyl);
-  overflow-wrap: anywhere;
-}
 
-.techbox__name {
-  display: block;
-  margin-bottom: 6px;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--izvest);
-}
 
-.techbox code {
-  background: none;
-  padding: 0;
-  color: var(--izvest);
-}
 
 .media {
   display: flex;

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /tools/
 
 Sitemap: https://deadland.site/sitemap.xml
