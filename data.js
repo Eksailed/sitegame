@@ -1,5 +1,5 @@
 ﻿window.DEADLAND_DATA = {
-  fallbackVersion: "0.66.4",
+  fallbackVersion: "0.66.5",
   categories: [
     { id: "all", label: "Все версии" },
     { id: "milestone", label: "Ключевые релизы" },
@@ -13,9 +13,21 @@
   ],
   versions: [
     {
-      version: "0.66.4",
+      version: "0.66.5",
       type: "patch",
       current: true,
+      date: "2026-10-12",
+      author: "lerk",
+      title: "Корзина и бинокль лежат в руке так, как выставил автор",
+      summary: "Ещё два предмета в руках доведены автором вручную: пальцы ложатся на корзину и бинокль, а не торчат в воздухе.",
+      categories: ["craft", "character"],
+      improvements: [
+        "<strong>Что доведено:</strong> корзина и бинокль. До них так же были доведены будильники, пепельница, тазы, стерильный бинт, газовый ключ и консервы."
+      ]
+    },
+    {
+      version: "0.66.4",
+      type: "patch",
       date: "2026-10-12",
       author: "lerk",
       title: "Предметы в руках лежат аккуратнее: хват нескольких предметов доведён вручную",
