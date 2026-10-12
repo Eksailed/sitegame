@@ -105,9 +105,13 @@ function emptied(original, cleaned) {
   return had && !cleaned.summary && cleaned.improvements.length === 0;
 }
 
-// Записи, смысл которых целиком во внутренней кухне
+// Записи, смысл которых целиком во внутренней кухне: правила, документы, рабочие инструменты и промежуточные шаги
 export function isInternal(v) {
-  return /правил\S* для агентов|для агентов|документаци\S* (?:всех )?систем|AGENTS/i.test(`${v.title} ${v.summary}`);
+  const hay = `${v.title} ${v.summary}`;
+  return (
+    /правил\S* для агентов|для агентов|документаци\S* (?:всех )?систем|AGENTS/i.test(hay) ||
+    /^(?:редактор хвата|общая система хвата|первый хват автора из редактора|хват газового ключа)|\(в работе\)/i.test(String(v.title).trim())
+  );
 }
 
 export function sanitizeData(data) {
