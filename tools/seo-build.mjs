@@ -7,9 +7,10 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { loadCurated } from "./lib/site-data.mjs";
 import { renderSeo } from "./lib/seo.mjs";
+import { sanitizeData } from "./lib/sanitize.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const data = loadCurated(root);
+const data = sanitizeData(loadCurated(root));
 const { html, sitemap, summary } = renderSeo(readFileSync(join(root, "index.html"), "utf8"), data);
 writeFileSync(join(root, "index.html"), html);
 writeFileSync(join(root, "sitemap.xml"), sitemap);

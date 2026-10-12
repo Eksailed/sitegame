@@ -16,6 +16,7 @@ import { dirname, join, resolve } from "node:path";
 import { readReleases } from "./lib/game-releases.mjs";
 import { loadCurated, mergeReleases, serialize } from "./lib/site-data.mjs";
 import { renderSeo } from "./lib/seo.mjs";
+import { sanitizeData } from "./lib/sanitize.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -55,7 +56,7 @@ try {
 }
 
 try {
-  const data = mergeReleases(loadCurated(root), releases);
+  const data = sanitizeData(mergeReleases(loadCurated(root), releases));
   const seo = renderSeo(readFileSync(join(root, "index.html"), "utf8"), data);
 
   mkdirSync(out, { recursive: true });

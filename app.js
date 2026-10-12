@@ -126,7 +126,7 @@
     if (state.author !== "all" && !v.author.toLowerCase().includes(state.author.toLowerCase())) return false;
     const q = state.query.trim().toLowerCase();
     if (q) {
-      const hay = [v.version, v.title, v.summary, v.author, v.commit, v.tech || "", ...(v.improvements || [])].join(" ").toLowerCase();
+      const hay = [v.version, v.title, v.summary, v.author, ...(v.improvements || [])].join(" ").toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -179,7 +179,7 @@
     const points = (v.improvements || []).map((p) => `<li>${richText(p)}</li>`).join("");
     const hasMedia = Array.isArray(v.media) && v.media.length > 0;
     // Записи, собранные из git игры, бывают без подробностей: раскрывать у них нечего
-    const expandable = Boolean(points || v.tech || hasMedia);
+    const expandable = Boolean(points || hasMedia);
 
     const cls = [
       "entry",
@@ -223,7 +223,6 @@
           <p class="entry__meta">
             <span>${humanDate(dayKey(v.date), false)}</span>
             <span>${v.author}</span>
-            <code>${v.commit}</code>
           </p>
           <h3 class="entry__title">
             ${expandable ? `<button type="button" class="entry__toggle" aria-expanded="${isOpen}" aria-controls="${id}-body">${v.title}</button>` : `<span class="entry__toggle">${v.title}</span>`}
@@ -240,7 +239,6 @@
           <div class="entry__content${hasMedia ? " has-media" : ""}">
             <div>
               ${points ? `<ul class="points">${points}</ul>` : ""}
-              ${v.tech ? `<div class="techbox"><span class="techbox__name">Файлы и проверки</span>${richText(v.tech)}</div>` : ""}
             </div>
             ${media}
           </div>

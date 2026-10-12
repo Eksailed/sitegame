@@ -30,7 +30,7 @@ export function mergeReleases(curated, releases) {
 
 export function serialize(data) {
   return (
-    "// Собрано tools/live-build.mjs: рукотворный data.js плюс версии из git игры. Руками не править.\n" +
+    "// Файл собирается автоматически. Руками не править.\n" +
     `window.DEADLAND_DATA = ${JSON.stringify(data)};\n`
   );
 }
