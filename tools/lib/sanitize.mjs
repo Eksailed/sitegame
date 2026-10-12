@@ -122,5 +122,13 @@ export function sanitizeData(data) {
     .map((v) => [v, cleanVersion(v)])
     .filter(([orig, cleaned]) => !emptied(orig, cleaned))
     .map(([, cleaned]) => cleaned);
+  // Самая новая версия игры может оказаться скрытой (рабочий инструмент): номер на сайте всё равно настоящий,
+  // а «текущей» в журнале помечается первая показанная запись.
+  const newest = (data.versions || [])[0];
+  if (newest) out.fallbackVersion = newest.version;
+  out.versions.forEach((v, i) => {
+    if (i === 0) v.current = true;
+    else delete v.current;
+  });
   return out;
 }

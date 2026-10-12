@@ -61,7 +61,7 @@ try {
 
   mkdirSync(out, { recursive: true });
   const changed = [
-    write("VERSION", `${data.versions[0].version}\n`),
+    write("VERSION", `${data.fallbackVersion}\n`),
     write("data.js", serialize(data)),
     write("index.html", seo.html),
     write("sitemap.xml", seo.sitemap)
@@ -69,7 +69,7 @@ try {
 
   const added = data.versions.filter((v) => v.auto).length;
   console.log(
-    `версия ${data.versions[0].version}, журнал ${data.versions.length} (из git игры добавлено ${added}), ` +
+    `версия ${data.fallbackVersion}, журнал ${data.versions.length} (из git игры добавлено ${added}), ` +
       (changed ? `обновлено файлов: ${changed}` : "без изменений")
   );
 } catch (err) {

@@ -26,7 +26,7 @@ export function renderSeo(html, data) {
   const days = data.versions.map((v) => dayKey(v.date)).sort();
   const firstDay = days[0];
   const lastDay = days[days.length - 1];
-  const newest = data.versions[0];
+  const newest = { ...data.versions[0], version: data.fallbackVersion || data.versions[0].version };
 
   const journal = data.versions
     .map(
