@@ -25,6 +25,7 @@ const DROP_SENTENCE = [
   /\b(?:dotnet|check_docs|AGENTS|README|VERSION|run_[a-z_]+|git (?:pull|push|merge))\b|\.csproj/i,
   /правил\S* для агентов|для агентов|агент\S*|\b(?:Cursor|Claude|Codex|ChatGPT|Copilot)\b/i,
   /параллельн\S+ сессии|конфликты только/i,
+  /дан\S* нов\S+ номер|нов\S+ номер \d/i,
   /редактор\S* хвата/i,
   /не (?:собиралось|запускалось|смотрелось)/i,
   /^версия игры \d/i,
@@ -57,6 +58,8 @@ function stripPlainIdentifiers(text) {
 
 function tidy(text) {
   return text
+    .replace(/\(\s*\.\.\.[^()]*\)/g, "") // обрывки вызовов кода вроде «(..., at)»
+    .replace(/\s*\(\s*[A-Za-z]+\.\s*[,;]?\s*\)/g, "") // «(Zombie.)»
     .replace(/\(\s*(?:[,;]\s*)*(?:коммит|commit)\s*(?:[,;]\s*)*\)/gi, "") // «(файл, коммит хеш)» после вычистки
     .replace(/\s*\(\s*(?:\.\w*\s*)?\)/g, "") // скобки с обрывком вроде «(.)»
     .replace(/\s*\(\s*(?:[,;]\s*)*\)/g, "") // пустые скобки
@@ -64,7 +67,7 @@ function tidy(text) {
     .replace(/\s*[,;]\s*\)/g, ")")
     .replace(/,(?:\s*,)+/g, ",")
     .replace(/\s+и\s*\)/g, ")")
-    .replace(/\s+([.,;:!?])/g, "$1")
+    .replace(/\s+([.,;:!?)])/g, "$1")
     .replace(/\s+(<\/strong>)/g, "$1")
     .replace(/\s{2,}/g, " ")
     .replace(/^\s*[,;:.\-—]\s*/, "")
@@ -96,6 +99,15 @@ export function cleanVersion(v) {
   delete next.commit; // номера коммитов приватного репозитория тоже внутренние
   next.title = cleanString(v.title, { sentences: false }) || v.title;
   next.summary = cleanString(v.summary);
+  // «Слияние ветки …» говорит о кухне, а не об игре: заголовком становится первая фраза описания
+  if (/^слияние(?![а-яё])/i.test(next.title) && next.summary) {
+    const text = next.summary.replace(/^(?:из\s+(?:неё|него|них)\s+)/i, "").replace(/^в\s+\S+\s+влит\S*[^:.]*[:.]?\s*/i, "").trim();
+    const first = text.split(/(?<=[.!?])\s+/)[0].replace(/[.]+$/, "");
+    if (first.length >= 12) {
+      next.title = first[0].toUpperCase() + first.slice(1);
+      next.summary = text.slice(first.length).replace(/^[.\s]+/, "");
+    }
+  }
   next.improvements = (v.improvements || []).map(cleanString).filter(usable);
   return next;
 }
@@ -106,13 +118,18 @@ function emptied(original, cleaned) {
   return had && !cleaned.summary && cleaned.improvements.length === 0;
 }
 
+// Версии, описанные рукотворной записью под другим номером (после слияния веток итог получил новый номер)
+const SUPERSEDED = new Set(["0.65.0"]);
+
 // Записи, смысл которых целиком во внутренней кухне: правила, документы, рабочие инструменты и промежуточные шаги
 export function isInternal(v) {
   const hay = `${v.title} ${v.summary}`;
   return (
+    SUPERSEDED.has(v.version) ||
     /правил\S* для агентов|для агентов|документаци\S* (?:всех )?систем|AGENTS/i.test(hay) ||
     /^(?:редактор хвата|общая система хвата|первый хват автора из редактора|хват газового ключа)|\(в работе\)/i.test(String(v.title).trim()) ||
-    /редактор\S* Godot|импорт\S* (?:3D-)?моделей при запуске/i.test(String(v.title))
+    /редактор\S* Godot|импорт\S* (?:3D-)?моделей при запуске/i.test(String(v.title)) ||
+    /страниц\S* списка хвата|списка хвата|правка любых данных предмета/i.test(hay)
   );
 }
 
