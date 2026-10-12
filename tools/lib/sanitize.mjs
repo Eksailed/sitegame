@@ -25,6 +25,7 @@ const DROP_SENTENCE = [
   /\b(?:dotnet|check_docs|AGENTS|README|VERSION|run_[a-z_]+|git (?:pull|push|merge))\b|\.csproj/i,
   /правил\S* для агентов|для агентов|агент\S*|\b(?:Cursor|Claude|Codex|ChatGPT|Copilot)\b/i,
   /параллельн\S+ сессии|конфликты только/i,
+  /редактор\S* хвата/i,
   /не (?:собиралось|запускалось|смотрелось)/i,
   /^версия игры \d/i,
   // команды консоли разработчика списком
