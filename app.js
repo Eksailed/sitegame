@@ -148,7 +148,7 @@
             : cat.id === "milestone"
             ? data.versions.filter((v) => v.milestone).length
             : data.versions.filter((v) => v.categories.includes(cat.id)).length;
-        const label = cat.id === "world" ? "Мир и город Ржавый Бор" : cat.label.charAt(0) + cat.label.slice(1).toLowerCase();
+        const label = cat.id === "world" ? "Мир и город Саратовск" : cat.label.charAt(0) + cat.label.slice(1).toLowerCase();
         return `<button type="button" class="cat" data-cat="${cat.id}" aria-pressed="${state.category === cat.id}">
           <span>${label}</span><span class="cat__n">${n}</span>
         </button>`;
