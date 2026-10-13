@@ -1903,6 +1903,14 @@ select.input {
   color: var(--khaki-text);
 }
 
+.idea.is-cancelled {
+  opacity: 0.62;
+}
+
+.idea.is-cancelled .idea__title {
+  text-decoration: line-through;
+}
+
 .idea.is-approved .idea__status {
   border-color: rgba(216, 169, 51, 0.55);
   color: var(--signal);

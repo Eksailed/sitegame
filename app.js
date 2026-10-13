@@ -449,6 +449,7 @@
   // ---------- Идеи ----------
 
   function ideaGroup(idea) {
+    if (/^Отменен/.test(idea.status)) return "cancelled";
     if (idea.done) return "done";
     if (/^(Утверждено|К демо)/.test(idea.status)) return "approved";
     return "design";
@@ -463,7 +464,8 @@
       { id: "all", label: "Все" },
       { id: "done", label: "Уже в игре" },
       { id: "approved", label: "Утверждено" },
-      { id: "design", label: "Проектируется" }
+      { id: "design", label: "Проектируется" },
+      { id: "cancelled", label: "Отменено" }
     ];
 
     function render() {
