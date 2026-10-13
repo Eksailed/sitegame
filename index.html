@@ -60,7 +60,7 @@
         "minValue": 1,
         "maxValue": 8
       },
-      "softwareVersion": "0.77.0",
+      "softwareVersion": "0.78.0",
       "dateCreated": "2026-10-08",
       "dateModified": "2026-10-13",
       "author": [
@@ -119,7 +119,7 @@
       </nav>
       <span class="bar__ver" title="Версия игры из её git">
         <span class="lamp" aria-hidden="true"></span>
-        <span>v<span data-live-version>0.77.0</span></span>
+        <span>v<span data-live-version>0.78.0</span></span>
       </span>
     </div>
   </header>
@@ -160,7 +160,7 @@
 
       <div class="wrap hero__brief">
       <dl class="brief">
-        <div><dt data-count-label="versions">версий в журнале</dt><dd data-count="versions">85</dd></div>
+        <div><dt data-count-label="versions">версий в журнале</dt><dd data-count="versions">86</dd></div>
         <div><dt>здания в городе и 10 ферм</dt><dd>34</dd></div>
         <div><dt>игроков по LAN</dt><dd>до 8</dd></div>
         <div><dt data-count-label="items">предметов первого крафта</dt><dd data-count="items">14</dd></div>
@@ -236,7 +236,7 @@
           <h2 id="journal-title">Журнал версий</h2>
           <p>
             Что менялось в каждой сборке: механики, исправления, файлы и проверки. Записи идут по дням разработки,
-            от прототипа 0.0 до <span data-live-version>0.77.0</span>. Нажмите на запись, чтобы раскрыть подробности.
+            от прототипа 0.0 до <span data-live-version>0.78.0</span>. Нажмите на запись, чтобы раскрыть подробности.
           </p>
         </header>
 
@@ -284,6 +284,7 @@
           </aside>
 
           <div class="log" id="version-timeline" data-lb-group><!-- seo:journal:start -->
+<article class="snap"><h3>Версия 0.78.0: Причёски грузятся только когда выбраны: видеопамять в мире с игроком 451 → 389 МБ</h3><p><time datetime="2026-10-13">13 октября 2026 г.</time>. Десять новых причёсок из 0.75.0 больше не лежат в памяти все сразу: загружается только выбранная, а зомби берут причёску из короткого списка недорогих.</p></article>
 <article class="snap"><h3>Версия 0.77.0: Строительство из деталей на сетке 3 м, предмет «Проект» и круговое меню</h3><p><time datetime="2026-10-13">13 октября 2026 г.</time>. В игре появилось строительство из деталей на сетке 3 м: фундамент, стена, проём и перекрытие ставятся с предметом «Проект» в руке, а действия выбираются круговым меню на правую кнопку мыши.</p></article>
 <article class="snap"><h3>Версия 0.76.0: Одна общая поза работы руками на любое дело</h3><p><time datetime="2026-10-13">13 октября 2026 г.</time>. Для лута, плиты, готовки, крафта и стройки отдельных анимаций делать не будут: выживший чуть наклоняется вперёд и перебирает руками перед собой, а предмет из рук на время работы убирается.</p></article>
 <article class="snap"><h3>Версия 0.75.0: Десять новых причёсок, общие для мужчины и женщины</h3><p><time datetime="2026-10-13">13 октября 2026 г.</time>. Причёсок теперь тринадцать и вариант «Без волос», набор один на оба пола.</p></article>
@@ -527,6 +528,24 @@
               <data class="gauge__val" value="593">593 МБ</data>
             </div>
             <p class="gauge__note">Прогулка по всей площадке на карте с 512 МБ: раньше игра падала на пике 758 МБ, теперь выставка строится участками, ошибок видеопамяти нет.</p>
+          </article>
+
+          <article class="gauge">
+            <header class="gauge__head">
+              <h3>Видеопамять в мире с игроком</h3>
+              <strong class="gauge__gain">на 14% меньше</strong>
+            </header>
+            <div class="gauge__row is-before" style="--w: 100%">
+              <span class="gauge__what">до</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="451">451 МБ</data>
+            </div>
+            <div class="gauge__row is-after" style="--w: 86.3%">
+              <span class="gauge__what">после</span>
+              <span class="gauge__track"><span class="gauge__fill"></span></span>
+              <data class="gauge__val" value="389">389 МБ</data>
+            </div>
+            <p class="gauge__note">Причёски грузятся по одной, только когда выбраны; у зомби короткий список недорогих причёсок.</p>
           </article>
         </div>
 
@@ -829,7 +848,7 @@
     <div class="wrap foot__in">
       <p class="foot__mark">Deadland</p>
       <p>Кооперативное выживание на Godot 4.7 .NET. Делают lerk и Eksailed.</p>
-      <p>Номер версии и новые записи журнала сайт сам берёт из git игры: сейчас <strong data-live-version>0.77.0</strong>.</p>
+      <p>Номер версии и новые записи журнала сайт сам берёт из git игры: сейчас <strong data-live-version>0.78.0</strong>.</p>
     </div>
   </footer>
 
