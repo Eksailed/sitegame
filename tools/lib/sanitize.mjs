@@ -7,7 +7,8 @@
 const KEY = /^(?:[A-ZА-ЯЁ]|F\d{1,2}|Shift|Ctrl|Alt|Tab|TAB|Esc|ESC|Enter|Space|Backspace|ЛКМ|ПКМ|~|Ё|WASD|[A-Z]\/[A-Z]|[A-Z]\+[A-Z])$/;
 
 // Слова, которые похожи на идентификаторы, но это названия технологий и источников
-const KEEP_WORDS = new Set(["DayZ", "MakeHuman", "ambientCG", "PolyHaven", "MPFB", "OpenGL", "GitHub"]);
+// Авторы моделей по лицензии CC-BY: их имена нужны для атрибуции.
+const KEEP_WORDS = new Set(["DayZ", "MakeHuman", "ambientCG", "PolyHaven", "MPFB", "OpenGL", "GitHub", "TwilightFox", "Modelified", "Meerschaum"]);
 
 const FILE_EXT = "cs|py|gd|gdshader|tscn|tres|bat|sh|mjs|json|md|glb|bin|pck|exe|import|scn|csproj";
 const ROOTS = "src|tools|docs|assets|scenes|ui|art";
@@ -25,9 +26,10 @@ const DROP_SENTENCE = [
   /\b(?:dotnet|check_docs|AGENTS|README|VERSION|run_[a-z_]+|git (?:pull|push|merge))\b|\.csproj/i,
   /правил\S* для агентов|для агентов|агент\S*|\b(?:Cursor|Claude|Codex|ChatGPT|Copilot)\b/i,
   /параллельн\S+ сессии|конфликты только/i,
+  /пайплайн|исходник\S* для Blender/i,
   /дан\S* нов\S+ номер|нов\S+ номер \d/i,
   /редактор\S* хвата/i,
-  /не (?:собиралось|запускалось|смотрелось)/i,
+  /не (?:собиралось|запускалось)/i, // честное «пока не смотрелось» в записях для игрока оставляем
   /^версия игры \d/i,
   // команды консоли разработчика списком
   /\b(?:give|spawn|wound|freeze|heal|god|tp|speed)\b[,\s]+(?:give|spawn|wound|freeze|heal|god|tp|speed)\b/i,
@@ -81,7 +83,8 @@ export function cleanString(text, { sentences = true } = {}) {
   out = out
     .replace(new RegExp(String.raw`\b(?:${ROOTS})/[^\s,;:)<"'«»]+`, "g"), "")
     .replace(new RegExp(String.raw`[\w\-./а-яёА-ЯЁ]+\.(?:${FILE_EXT})\b`, "g"), "")
-    .replace(/\s*\((?:Codex|Claude|Cursor|ChatGPT|Copilot|Gemini)[^)]*\)/g, "");
+    .replace(/\s*\((?:Codex|Claude|Cursor|ChatGPT|Copilot|Gemini)[^)]*\)/g, "")
+    .replace(/\s+(?:в|для|из|через|без)\s+Blender\b/g, "");
   out = stripPlainIdentifiers(out);
   return tidy(out);
 }
