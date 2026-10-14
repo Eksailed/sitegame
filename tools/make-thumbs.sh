@@ -18,5 +18,3 @@ grep -ohE '\./(docs|art)/[^"]+\.png' data.js index.html | sort -u | while read -
   fi
   echo "$out/$name"
 done
-cwebp -quiet -q 80 docs/city/street.png -o assets/site/hero-street.webp
-sips -s format jpeg -s formatOptions 82 -Z 1200 docs/city/street.png --out assets/site/og.jpg >/dev/null
