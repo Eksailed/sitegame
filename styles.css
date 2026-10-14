@@ -1893,14 +1893,6 @@ select.input {
   color: var(--signal-text);
 }
 
-.note {
-  padding: 18px 0;
-  border-top: 1px solid var(--shov);
-  border-bottom: 1px solid var(--shov);
-  font-size: 0.95rem;
-  color: var(--pyl);
-}
-
 /* ---------- Подвал ---------- */
 
 .foot {

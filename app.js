@@ -500,26 +500,6 @@
     });
   }
 
-  // ---------- Брейншторм ----------
-
-  function initBrainstorm() {
-    const list = $("#brainstorm-grid");
-    const empty = $("#brainstorm-empty");
-    if (!list) return;
-    const items = data.brainstorm || [];
-    if (empty) empty.hidden = items.length > 0;
-    list.innerHTML = items
-      .map(
-        (item, i) => `<li class="idea">
-          <span class="idea__n">${String(i + 1).padStart(2, "0")}</span>
-          <h3 class="idea__title">${item.title}</h3>
-          <p class="idea__desc">${item.desc}</p>
-          ${item.tag ? `<span class="idea__status">${item.tag}</span>` : ""}
-        </li>`
-      )
-      .join("");
-  }
-
   // ---------- Сравнение «до и после» ----------
 
   function initCompares() {
@@ -643,7 +623,6 @@
     initInventory();
     initGallery();
     initIdeas();
-    initBrainstorm();
     initCompares();
     initGauges();
     initLightbox();
