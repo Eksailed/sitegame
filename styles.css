@@ -4,20 +4,21 @@
   color-scheme: dark;
 
   /* Палитра */
-  --okalina: #191c16;      /* фон: тёмная оливковая краска по стали */
-  --bronya: #20241c;       /* плиты и панели */
-  --bronya-2: #282d23;     /* приподнятые элементы */
-  --shov: #3a4033;         /* линии и швы */
-  --shov-2: #4d5543;
-  --izvest: #ddd6c1;       /* основной текст: известь */
-  --pyl: #a19d88;          /* второстепенный текст */
-  --pepel: #77755f;        /* третий план */
-  --signal: #d8a933;       /* сигнальный жёлтый гражданской обороны */
-  --signal-ink: #1b1a10;
+  --okalina: #14161a;      /* фон: графит */
+  --bronya: #1b1e22;       /* плиты и панели */
+  --bronya-2: #24282d;     /* приподнятые элементы */
+  --shov: #33383e;         /* линии и швы */
+  --shov-2: #474d54;
+  --izvest: #e3e1da;       /* основной текст: известь */
+  --pyl: #9fa2a5;          /* второстепенный текст */
+  --pepel: #767a7e;        /* третий план */
+  --signal: #a8452c;       /* кирпично-красный акцент */
+  --signal-text: #e0775a;  /* кирпично-красный для текста на графите */
+  --signal-ink: #f3efe6;
   --rust: #a8452c;         /* угроза, «до» */
-  --rust-text: #e2805f;
-  --khaki: #8f9b5c;        /* безопасно, «после», сделано */
-  --khaki-text: #b4c07c;
+  --rust-text: #e0775a;
+  --khaki: #7f9a78;        /* безопасно, «после», сделано */
+  --khaki-text: #a6bf9f;
 
   /* Шрифты */
   --f-display: "Sofia Sans Extra Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
@@ -98,7 +99,7 @@ button {
 }
 
 a {
-  color: var(--signal);
+  color: var(--signal-text);
   text-underline-offset: 0.2em;
 }
 
@@ -111,7 +112,7 @@ code {
   font-family: var(--f-mono);
   font-size: 0.86em;
   color: var(--izvest);
-  background: rgba(221, 214, 193, 0.07);
+  background: rgba(227, 225, 218, 0.07);
   padding: 0 0.2em;
   overflow-wrap: anywhere;
 }
@@ -193,12 +194,12 @@ strong {
 }
 
 .btn--signal:hover {
-  background: #e6bb4b;
-  border-color: #e6bb4b;
+  background: #c2523a;
+  border-color: #c2523a;
 }
 
 .btn--ghost {
-  background: rgba(25, 28, 22, 0.55);
+  background: rgba(20, 22, 26, 0.55);
   backdrop-filter: blur(4px);
 }
 
@@ -234,7 +235,7 @@ strong {
   font-weight: 900;
   font-size: 4.4rem;
   line-height: 0.8;
-  color: var(--signal);
+  color: var(--signal-text);
 }
 
 .step__t {
@@ -340,7 +341,7 @@ strong {
   top: 0;
   z-index: var(--z-bar);
   height: var(--bar-h);
-  background: rgba(25, 28, 22, 0.92);
+  background: rgba(20, 22, 26, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--shov);
 }
@@ -350,6 +351,12 @@ strong {
   align-items: center;
   gap: clamp(16px, 3vw, 40px);
   height: 100%;
+}
+
+.bar__mark img {
+  display: block;
+  width: auto;
+  height: 40px;
 }
 
 .bar__mark {
@@ -422,7 +429,7 @@ strong {
   width: 8px;
   height: 8px;
   background: var(--signal);
-  box-shadow: 0 0 0 3px rgba(216, 169, 51, 0.16), 0 0 10px rgba(216, 169, 51, 0.6);
+  box-shadow: 0 0 0 3px rgba(168, 69, 44, 0.16), 0 0 10px rgba(168, 69, 44, 0.6);
 }
 
 /* ---------- Первый экран ---------- */
@@ -436,73 +443,45 @@ strong {
   min-height: calc(100dvh - var(--bar-h));
   min-height: max(640px, calc(100dvh - var(--bar-h)));
   overflow: hidden;
-  background: #0f110d;
+  background: #0d0e10;
 }
 
+.hero {
+  --cover-h: min(33.34vw, 667px);
+}
+
+/* Обложка: логотип слева, город справа; снизу растворяется в фон страницы */
 .hero__scene {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--cover-h);
   z-index: var(--z-scene);
-  --x: 62%;
-  --y: 62%;
-  --r: clamp(200px, 28vw, 420px);
+  overflow: hidden;
 }
 
-.hero__scene img {
-  position: absolute;
-  inset: 0;
+.hero__cover {
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
   object-fit: cover;
-  object-position: 60% 60%;
+  object-position: 50% 50%;
 }
 
-/* Ночь: улица без света */
-.hero__dark {
-  filter: grayscale(0.75) sepia(0.35) hue-rotate(35deg) brightness(0.24) contrast(1.15);
-}
-
-/* Луч фонаря: тёплый, с неровным краем */
-.hero__lit {
-  filter: saturate(0.6) sepia(0.4) brightness(1.12) contrast(1.1);
-  -webkit-mask-image: radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, rgba(0, 0, 0, 0.85) 38%, rgba(0, 0, 0, 0.25) 68%, transparent 100%);
-  mask-image: radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, rgba(0, 0, 0, 0.85) 38%, rgba(0, 0, 0, 0.25) 68%, transparent 100%);
-}
-
-/* Затемнение под текст и переход в фон страницы */
 .hero__scene::after {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(15, 17, 13, 0.7) 0%, rgba(15, 17, 13, 0.25) 42%, rgba(15, 17, 13, 0) 62%),
-    linear-gradient(0deg, var(--okalina) 0%, rgba(25, 28, 22, 0.7) 18%, rgba(25, 28, 22, 0) 44%),
-    radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(10, 11, 8, 0.6) 100%);
-}
-
-/* Генератор запускается: свет моргает один раз при загрузке */
-@media (prefers-reduced-motion: no-preference) {
-  .hero__lit {
-    animation: power-on 1.7s steps(1, end) 0.25s both;
-  }
-}
-
-@keyframes power-on {
-  0% { opacity: 0; }
-  10% { opacity: 0.7; }
-  14% { opacity: 0.05; }
-  26% { opacity: 0.85; }
-  30% { opacity: 0.2; }
-  34% { opacity: 0.6; }
-  38% { opacity: 0.1; }
-  55% { opacity: 1; }
-  100% { opacity: 1; }
+  background: linear-gradient(0deg, var(--okalina) 0%, rgba(20, 22, 26, 0.6) 14%, rgba(20, 22, 26, 0) 38%);
 }
 
 .hero__in {
   position: relative;
   z-index: var(--z-content);
-  padding-top: clamp(48px, 10vh, 120px);
+  padding-top: calc(var(--cover-h) - clamp(24px, 5vw, 72px));
 }
 
 .hero__place {
@@ -511,18 +490,16 @@ strong {
   font-size: 0.98rem;
 }
 
-/* Название набито по трафарету: перемычки режут буквы, краска даёт ореол */
+/* На широком экране название уже нарисовано на обложке */
 .hero__title {
-  margin: 0.04em 0 0.08em -0.04em;
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: clamp(5.2rem, 21vw, 19rem);
-  line-height: 0.8;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  color: var(--izvest);
-  -webkit-mask-image: linear-gradient(180deg, #000 0 41%, transparent 41% 44.5%, #000 44.5% 100%);
-  mask-image: linear-gradient(180deg, #000 0 41%, transparent 41% 44.5%, #000 44.5% 100%);
+  margin: 0;
+}
+
+.hero__logo {
+  display: none;
+  width: min(78vw, 440px);
+  height: auto;
+  margin: 0 0 8px -6px;
 }
 
 .hero__row {
@@ -535,7 +512,7 @@ strong {
 .hero__lead {
   max-width: 58ch;
   font-size: clamp(1.02rem, 1.3vw, 1.15rem);
-  color: #cfc8b2;
+  color: #cbcac3;
   text-wrap: pretty;
 }
 
@@ -555,7 +532,7 @@ strong {
   column-gap: 14px;
   padding: 14px 18px 16px;
   border-left: 3px solid var(--signal);
-  background: rgba(15, 17, 13, 0.62);
+  background: rgba(13, 14, 16, 0.62);
   backdrop-filter: blur(4px);
 }
 
@@ -566,7 +543,7 @@ strong {
   font-weight: 800;
   font-size: 1.35rem;
   line-height: 1;
-  color: var(--signal);
+  color: var(--signal-text);
 }
 
 .daycount__num {
@@ -634,7 +611,7 @@ strong {
   position: relative;
   z-index: var(--z-content);
   height: 12px;
-  background: repeating-linear-gradient(-45deg, var(--signal) 0 14px, #17150d 14px 28px);
+  background: repeating-linear-gradient(-45deg, var(--signal) 0 14px, #0e0f10 14px 28px);
   opacity: 0.92;
 }
 
@@ -801,13 +778,13 @@ select.input {
 
 .cat:hover {
   color: var(--izvest);
-  background: rgba(221, 214, 193, 0.03);
+  background: rgba(227, 225, 218, 0.03);
 }
 
 .cat[aria-pressed="true"] {
   color: var(--izvest);
-  border-left-color: var(--signal);
-  background: rgba(216, 169, 51, 0.06);
+  border-left-color: var(--signal-text);
+  background: rgba(168, 69, 44, 0.06);
 }
 
 .cat__n {
@@ -817,7 +794,7 @@ select.input {
 }
 
 .cat[aria-pressed="true"] .cat__n {
-  color: var(--signal);
+  color: var(--signal-text);
 }
 
 /* Сегментный переключатель */
@@ -966,7 +943,7 @@ select.input {
 }
 
 .entry.is-current .entry__num {
-  color: var(--signal);
+  color: var(--signal-text);
 }
 
 .stamp {
@@ -981,7 +958,7 @@ select.input {
 }
 
 .stamp--now {
-  color: var(--signal);
+  color: var(--signal-text);
   transform: rotate(-3deg);
 }
 
@@ -1080,7 +1057,7 @@ select.input {
 }
 
 .entry__head:hover .entry__title {
-  color: #fff8e4;
+  color: #f3efe6;
 }
 
 /* Раскрытие: высота анимируется через сетку */
@@ -1121,7 +1098,7 @@ select.input {
   position: relative;
   padding-left: 22px;
   font-size: 0.96rem;
-  color: #c9c2ad;
+  color: #c4c3bd;
   max-width: 78ch;
 }
 
@@ -1275,7 +1252,7 @@ select.input {
 }
 
 .is-after .gauge__fill {
-  background: repeating-linear-gradient(90deg, var(--khaki) 0 6px, #78834c 6px 8px);
+  background: repeating-linear-gradient(90deg, var(--khaki) 0 6px, #6b8465 6px 8px);
 }
 
 .gauge__val {
@@ -1329,7 +1306,7 @@ select.input {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #0f110d;
+  background: #0d0e10;
   border: 1px solid var(--shov-2);
   user-select: none;
   touch-action: pan-y;
@@ -1396,7 +1373,7 @@ select.input {
   position: absolute;
   top: 12px;
   padding: 3px 8px;
-  background: rgba(15, 17, 13, 0.82);
+  background: rgba(13, 14, 16, 0.82);
   font-family: var(--f-display);
   font-weight: 800;
   font-size: 1rem;
@@ -1460,27 +1437,27 @@ select.input {
   gap: 6px;
   aspect-ratio: 1;
   padding: 10px 6px 8px;
-  background: rgba(221, 214, 193, 0.04);
-  border: 1px solid rgba(221, 214, 193, 0.09);
+  background: rgba(227, 225, 218, 0.04);
+  border: 1px solid rgba(227, 225, 218, 0.09);
   color: var(--pyl);
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .slot:hover {
-  background: rgba(221, 214, 193, 0.08);
-  border-color: rgba(221, 214, 193, 0.24);
+  background: rgba(227, 225, 218, 0.08);
+  border-color: rgba(227, 225, 218, 0.24);
   color: var(--izvest);
 }
 
 .slot--empty,
 .slot--empty:hover {
   background: rgba(0, 0, 0, 0.12);
-  border-color: rgba(221, 214, 193, 0.05);
+  border-color: rgba(227, 225, 218, 0.05);
 }
 
 .slot[aria-pressed="true"] {
-  background: rgba(216, 169, 51, 0.1);
-  border-color: var(--signal);
+  background: rgba(168, 69, 44, 0.1);
+  border-color: var(--signal-text);
   color: var(--izvest);
 }
 
@@ -1588,7 +1565,7 @@ select.input {
 
 .inv__role {
   font-size: 0.95rem;
-  color: #c9c2ad;
+  color: #c4c3bd;
 }
 
 /* Рецепты: это цепочка, поэтому нумерация */
@@ -1664,7 +1641,7 @@ select.input {
   width: 34px;
   height: 34px;
   padding: 4px;
-  background: rgba(221, 214, 193, 0.05);
+  background: rgba(227, 225, 218, 0.05);
   border: 1px solid var(--shov);
   object-fit: contain;
 }
@@ -1674,7 +1651,7 @@ select.input {
 }
 
 .chip--out img {
-  border-color: var(--signal);
+  border-color: var(--signal-text);
 }
 
 .craft-cols {
@@ -1718,7 +1695,7 @@ select.input {
 }
 
 .table td {
-  color: #c9c2ad;
+  color: #c4c3bd;
 }
 
 .table td:nth-child(3),
@@ -1729,7 +1706,7 @@ select.input {
 
 .table tbody tr:hover th,
 .table tbody tr:hover td {
-  background: rgba(221, 214, 193, 0.03);
+  background: rgba(227, 225, 218, 0.03);
 }
 
 .build {
@@ -1741,7 +1718,7 @@ select.input {
 .build p {
   margin-top: 14px;
   font-size: 0.94rem;
-  color: #c9c2ad;
+  color: #c4c3bd;
 }
 
 .keys {
@@ -1761,7 +1738,7 @@ select.input {
 
 .keys dd {
   font-size: 0.92rem;
-  color: #c9c2ad;
+  color: #c4c3bd;
 }
 
 /* ---------- Кадры ---------- */
@@ -1798,7 +1775,7 @@ select.input {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #0f110d;
+  background: #0d0e10;
   border: 1px solid var(--shov);
 }
 
@@ -1912,14 +1889,14 @@ select.input {
 }
 
 .idea.is-approved .idea__status {
-  border-color: rgba(216, 169, 51, 0.55);
-  color: var(--signal);
+  border-color: rgba(168, 69, 44, 0.55);
+  color: var(--signal-text);
 }
 
 /* ---------- Подвал ---------- */
 
 .foot {
-  background: #13150f;
+  background: #101215;
 }
 
 .foot__in {
@@ -1957,7 +1934,7 @@ select.input {
 }
 
 .lb::backdrop {
-  background: rgba(10, 11, 8, 0.94);
+  background: rgba(8, 9, 10, 0.94);
 }
 
 .lb[open] {
@@ -1979,7 +1956,7 @@ select.input {
   max-height: calc(100dvh - 140px);
   object-fit: contain;
   border: 1px solid var(--shov-2);
-  background: #0f110d;
+  background: #0d0e10;
 }
 
 .lb__bar {
@@ -2138,7 +2115,7 @@ select.input {
   }
 
   .cat[aria-pressed="true"] {
-    border-color: var(--signal);
+    border-color: var(--signal-text);
   }
 
   .day__head {
@@ -2212,10 +2189,6 @@ select.input {
 @media (max-width: 560px) {
   body {
     font-size: 1rem;
-  }
-
-  .hero__title {
-    font-size: clamp(4rem, 23.5vw, 9rem);
   }
 
   .brief {
@@ -2324,4 +2297,24 @@ select.input {
 
 .entry.is-flat .entry__chev {
   visibility: hidden;
+}
+
+/* Узкий экран: надпись обложки не влезает, показываем логотип отдельно поверх городского края */
+@media (max-width: 720px) {
+  .hero {
+    --cover-h: 330px;
+  }
+
+  .hero__cover {
+    object-position: 86% 50%;
+    opacity: 0.55;
+  }
+
+  .hero__in {
+    padding-top: 28px;
+  }
+
+  .hero__logo {
+    display: block;
+  }
 }

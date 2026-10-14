@@ -533,29 +533,6 @@
     io.observe(gauges);
   }
 
-  // ---------- Фонарь в первом экране ----------
-
-  function initFlashlight() {
-    const scene = $("#hero-scene");
-    const hero = $(".hero");
-    if (!scene || !hero) return;
-    let frame = 0;
-    let target = null;
-
-    function apply() {
-      frame = 0;
-      if (!target) return;
-      scene.style.setProperty("--x", target.x + "px");
-      scene.style.setProperty("--y", target.y + "px");
-    }
-
-    hero.addEventListener("pointermove", (e) => {
-      const rect = scene.getBoundingClientRect();
-      target = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      if (!frame) frame = requestAnimationFrame(apply);
-    });
-  }
-
   // ---------- Просмотр кадра ----------
 
   function initLightbox() {
@@ -648,7 +625,6 @@
     initIdeas();
     initCompares();
     initGauges();
-    initFlashlight();
     initLightbox();
     initNavSpy();
   });

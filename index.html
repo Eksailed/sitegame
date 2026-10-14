@@ -7,7 +7,7 @@
   <meta name="description" content="Deadland: воксельное выживание от первого лица на Godot 4.7 .NET. Разрушаемый город Саратовск, крафт с голыми руками, до 8 игроков по LAN. Журнал версий." />
   <link rel="canonical" href="https://deadland.site/" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="theme-color" content="#191c16" />
+  <meta name="theme-color" content="#0d0e10" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Deadland" />
   <meta property="og:locale" content="ru_RU" />
@@ -16,14 +16,14 @@
   <meta property="og:image" content="https://deadland.site/assets/site/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="675" />
-  <meta property="og:image:alt" content="Ночная улица города Саратовск в Deadland, освещённая фонариком" />
+  <meta property="og:image:alt" content="Логотип Deadland на фоне заброшенного города" />
   <meta property="og:url" content="https://deadland.site/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Deadland — кооперативное выживание среди заражённых" />
   <meta name="twitter:description" content="Разрушаемый город, первый крафт с голыми руками, до 8 игроков по LAN. Журнал всех версий игры." />
   <meta name="twitter:image" content="https://deadland.site/assets/site/og.jpg" />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <!-- seo:jsonld:start -->
@@ -106,8 +106,7 @@
   <header class="bar">
     <div class="wrap bar__in">
       <a href="#top" class="bar__mark" aria-label="Deadland, в начало страницы">
-        <img src="./icon.svg" alt="" width="22" height="22" />
-        <span>Deadland</span>
+        <img src="./assets/site/logo.webp" alt="Deadland" width="76" height="38" />
       </a>
       <nav class="bar__nav" aria-label="Разделы">
         <a href="#test">Закрытый тест</a>
@@ -125,16 +124,18 @@
   </header>
 
   <main id="main">
-    <!-- Первый экран: ночная улица Саратовска под фонариком -->
+    <!-- Первый экран: обложка с логотипом -->
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero__scene" id="hero-scene" aria-hidden="true">
-        <img class="hero__dark" src="./assets/site/hero-street.webp" alt="" />
-        <img class="hero__lit" src="./assets/site/hero-street.webp" alt="" />
+      <div class="hero__scene" id="hero-scene">
+        <img class="hero__cover" src="./assets/site/header.webp" alt="Логотип Deadland на фоне заброшенного города" width="2000" height="667" fetchpriority="high" />
       </div>
 
       <div class="wrap hero__in">
+        <h1 class="hero__title" id="hero-title">
+          <img class="hero__logo" src="./assets/site/logo.webp" alt="Deadland" width="1000" height="500" />
+          <span class="sr-only">Deadland — кооперативное выживание среди заражённых</span>
+        </h1>
         <p class="hero__place">Город Саратовск. Электричества нет, связь только по локальной сети.</p>
-        <h1 class="hero__title" id="hero-title">Deadland<span class="sr-only"> — кооперативное выживание среди заражённых</span></h1>
 
         <div class="hero__row">
           <div class="hero__text">
