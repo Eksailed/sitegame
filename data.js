@@ -1,5 +1,5 @@
 ﻿window.DEADLAND_DATA = {
-  fallbackVersion: "0.140.0",
+  fallbackVersion: "0.140.1",
   categories: [
     { id: "all", label: "Все версии" },
     { id: "milestone", label: "Ключевые релизы" },
@@ -13,10 +13,24 @@
   ],
   versions: [
     {
+      version: "0.140.1",
+      type: "patch",
+      current: true,
+      date: "2026-10-15",
+      author: "lerk",
+      title: "Топливо в подсказках считается реальными минутами",
+      summary: "В подсказках у костра, печи, кузницы и коптильни «топлива на N» теперь показывает реальные минуты, а не игровые.",
+      categories: ["ui","craft"],
+      improvements: [
+        "<strong>Что было:</strong> «топлива на N» показывало игровые минуты, то есть в 60 раз больше реальных.",
+        "<strong>Что теперь:</strong> число показывает реальные минуты. Это касается костра, печи, кузницы и коптильни.",
+        "<strong>Что смотрелось:</strong> кадров нет, в игре глазом пока не смотрелось."
+      ]
+    },
+    {
       version: "0.140.0",
       type: "minor",
       milestone: true,
-      current: true,
       date: "2026-10-15",
       author: "lerk",
       title: "Навыки и опыт, разбор мебели",
