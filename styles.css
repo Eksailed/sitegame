@@ -2392,3 +2392,214 @@ select.input {
     display: block;
   }
 }
+
+/* ---------- Крафт и добыча: схема пути, кадры и анимации ---------- */
+
+.pathmap {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 12px 0 clamp(28px, 4vw, 48px);
+  padding: 0;
+}
+
+.pathmap__step {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 18px 18px 18px 64px;
+  background: var(--bronya);
+  border: 1px solid var(--shov);
+}
+
+.pathmap__step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border-top: 2px solid var(--pepel);
+  border-right: 2px solid var(--pepel);
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.pathmap__n {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--signal-text);
+}
+
+.pathmap__step strong {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--izvest);
+}
+
+.pathmap__step span:not(.pathmap__n) {
+  font-size: 0.88rem;
+  color: var(--pyl);
+}
+
+.shots {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 clamp(28px, 4vw, 48px);
+}
+
+.shots--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shots--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.shot {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  background: var(--bronya);
+  border: 1px solid var(--shov);
+  cursor: zoom-in;
+  font: inherit;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0d0f12;
+}
+
+.shot__cap {
+  padding: 12px 14px 14px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--pyl);
+}
+
+.shot:hover {
+  border-color: var(--shov-2);
+}
+
+.shot--clip {
+  position: relative;
+}
+
+.shot--clip::before {
+  content: "анимация";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 2px 8px;
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal-ink);
+  background: rgba(168, 69, 44, 0.92);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(18px, 3vw, 40px);
+  align-items: center;
+  margin: 12px 0 clamp(28px, 4vw, 48px);
+}
+
+.split--rev {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+}
+
+.split__text p + p {
+  margin-top: 12px;
+}
+
+.split__text {
+  color: #c4c3bd;
+  font-size: 0.95rem;
+}
+
+.build--wide {
+  max-width: 880px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+@media (max-width: 1000px) {
+  .pathmap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shots--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split,
+  .split--rev {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .pathmap,
+  .shots--2,
+  .shots--3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pathmap__step:not(:last-child)::after {
+    right: auto;
+    left: 28px;
+    top: auto;
+    bottom: -10px;
+    margin-top: 0;
+    transform: rotate(135deg);
+  }
+}
+
+.table--text td:nth-child(3),
+.table--text td:nth-child(5) {
+  white-space: normal;
+}
+
+.table--text td:nth-child(2) {
+  width: 46%;
+}
+
+.pathmap__step:nth-child(3n)::after {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .pathmap__step:nth-child(3n)::after {
+    display: block;
+  }
+
+  .pathmap__step:nth-child(2n)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pathmap__step:nth-child(2n)::after {
+    display: block;
+  }
+}
