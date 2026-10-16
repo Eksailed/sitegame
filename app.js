@@ -7,8 +7,11 @@
     author: "all",
     sort: "desc", // desc: от новых к старым, asc: с самого начала
     query: "",
-    ideas: "all"
+    ideas: "all",
+    page: 1
   };
+  // Записей на странице журнала
+  const PAGE_SIZE = 20;
   const openVersions = new Set(data.versions.filter((v) => v.current).map((v) => v.version));
 
   const categoryNames = {
@@ -249,6 +252,62 @@
     </article>`;
   }
 
+  // Дни разработки, как они идут в списке
+  function groupByDay(list) {
+    const groups = [];
+    list.forEach((v) => {
+      const key = dayKey(v.date);
+      const last = groups[groups.length - 1];
+      if (last && last.key === key) last.items.push(v);
+      else groups.push({ key, items: [v] });
+    });
+    return groups;
+  }
+
+  // Ровные страницы по записям; день, попавший на границу, продолжается на следующей
+  function paginate(list) {
+    const pages = [];
+    for (let i = 0; i < list.length; i += PAGE_SIZE) pages.push(list.slice(i, i + PAGE_SIZE));
+    return pages;
+  }
+
+  function pageNumbers(cur, total) {
+    const set = new Set([1, total, cur - 1, cur, cur + 1]);
+    if (cur <= 3) [2, 3, 4].forEach((n) => set.add(n));
+    if (cur >= total - 2) [total - 1, total - 2, total - 3].forEach((n) => set.add(n));
+    const nums = Array.from(set).filter((n) => n >= 1 && n <= total).sort((a, b) => a - b);
+    const out = [];
+    nums.forEach((n, i) => {
+      if (i && n - nums[i - 1] > 1) out.push(0);
+      out.push(n);
+    });
+    return out;
+  }
+
+  function pagerHtml(cur, total, pos) {
+    if (total <= 1) return "";
+    const btn = (n, label, extra = "") =>
+      `<button type="button" class="pager__btn" data-page="${n}"${extra}>${label}</button>`;
+    const items = pageNumbers(cur, total)
+      .map((n) =>
+        n === 0
+          ? `<span class="pager__gap" aria-hidden="true">…</span>`
+          : btn(n, n, n === cur ? ` aria-current="page"` : ` aria-label="Страница ${n}"`)
+      )
+      .join("");
+    return `<nav class="pager pager--${pos}" aria-label="Страницы журнала">
+      ${btn(cur - 1, "← " + (state.sort === "asc" ? "Раньше" : "Новее"), cur === 1 ? " disabled" : "")}
+      <div class="pager__nums">${items}</div>
+      ${btn(cur + 1, (state.sort === "asc" ? "Позже" : "Старее") + " →", cur === total ? " disabled" : "")}
+    </nav>`;
+  }
+
+  function goToPage(n, scroll = true) {
+    state.page = n;
+    renderTimeline();
+    if (scroll) document.getElementById("version-timeline")?.scrollIntoView({ behavior: "auto", block: "start" });
+  }
+
   function renderTimeline() {
     const box = $("#version-timeline");
     const countEl = $("#results-count");
@@ -272,26 +331,35 @@
     }
 
     // Группы по дням разработки, порядок сохраняется
-    const groups = [];
+    const pages = paginate(list);
+    state.page = Math.min(Math.max(1, state.page), pages.length);
+    const groups = groupByDay(pages[state.page - 1]);
+    const dayTotals = {};
     list.forEach((v) => {
-      const key = dayKey(v.date);
-      const last = groups[groups.length - 1];
-      if (last && last.key === key) last.items.push(v);
-      else groups.push({ key, items: [v] });
+      const k = dayKey(v.date);
+      dayTotals[k] = (dayTotals[k] || 0) + 1;
     });
 
-    box.innerHTML = groups
+    if (countEl && pages.length > 1) {
+      countEl.textContent += `, страница ${state.page} из ${pages.length}`;
+    }
+
+    box.innerHTML = pagerHtml(state.page, pages.length, "top") + groups
       .map(
         (g) => `<section class="day" aria-label="День ${dayNumber(g.key)}">
           <header class="day__head">
             <span class="day__n">День ${dayNumber(g.key)}</span>
             <span class="day__date">${humanDate(g.key)}</span>
-            <span class="day__count">${g.items.length} ${plural(g.items.length, "версия", "версии", "версий")}</span>
+            <span class="day__count">${
+              g.items.length < dayTotals[g.key]
+                ? `${g.items.length} из ${dayTotals[g.key]}`
+                : `${g.items.length} ${plural(g.items.length, "версия", "версии", "версий")}`
+            }</span>
           </header>
           ${g.items.map(entryHtml).join("")}
         </section>`
       )
-      .join("");
+      .join("") + pagerHtml(state.page, pages.length, "bottom");
   }
 
   function toggleEntry(ver, force) {
@@ -310,6 +378,7 @@
     state.category = "all";
     state.author = "all";
     state.query = "";
+    state.page = 1;
     const search = $("#version-search");
     if (search) search.value = "";
     $$("#author-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.author === "all")));
@@ -326,6 +395,7 @@
       const btn = e.target.closest(".cat");
       if (!btn) return;
       state.category = btn.dataset.cat || "all";
+      state.page = 1;
       renderCategories();
       renderTimeline();
     });
@@ -334,17 +404,20 @@
       const btn = e.target.closest("button[data-author]");
       if (!btn) return;
       state.author = btn.dataset.author;
+      state.page = 1;
       $$("#author-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
       renderTimeline();
     });
 
     $("#version-search")?.addEventListener("input", (e) => {
       state.query = e.target.value;
+      state.page = 1;
       renderTimeline();
     });
 
     $("#sort-order")?.addEventListener("change", (e) => {
       state.sort = e.target.value;
+      state.page = 1;
       renderTimeline();
     });
 
@@ -352,7 +425,14 @@
       const ver = e.target.value;
       if (!ver) return;
       openVersions.add(ver);
+      state.sort = $("#sort-order")?.value || state.sort;
       resetFilters();
+      const pages = paginate(filteredVersions());
+      const at = pages.findIndex((p) => p.some((v) => v.version === ver));
+      if (at >= 0 && at + 1 !== state.page) {
+        state.page = at + 1;
+        renderTimeline();
+      }
       e.target.value = "";
       document.getElementById(versionId(ver))?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -368,6 +448,11 @@
     });
 
     $("#version-timeline")?.addEventListener("click", (e) => {
+      const pg = e.target.closest("[data-page]");
+      if (pg) {
+        goToPage(Number(pg.dataset.page));
+        return;
+      }
       if (e.target.closest("[data-reset]")) {
         resetFilters();
         return;

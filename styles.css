@@ -865,6 +865,80 @@ select.input {
   margin-top: 56px;
 }
 
+/* Страницы журнала */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pager--top {
+  margin-bottom: 28px;
+}
+
+.pager--bottom {
+  margin-top: 40px;
+}
+
+.pager__nums {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pager__btn {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 6px 12px;
+  border: 1px solid var(--shov-2);
+  background: none;
+  color: var(--pyl);
+  font-family: var(--f-mono);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.pager__btn:hover:not(:disabled) {
+  color: var(--izvest);
+  border-color: var(--izvest);
+}
+
+.pager__btn[aria-current="page"] {
+  background: var(--izvest);
+  border-color: var(--izvest);
+  color: var(--okalina);
+  font-weight: 700;
+}
+
+.pager__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pager__gap {
+  align-self: center;
+  padding: 0 4px;
+  color: var(--pepel);
+}
+
+@media (max-width: 560px) {
+  .pager {
+    flex-wrap: wrap;
+  }
+
+  .pager__nums {
+    order: -1;
+    width: 100%;
+  }
+
+  .pager > .pager__btn {
+    flex: 1;
+  }
+}
+
 .day__head {
   position: sticky;
   top: var(--bar-h);
