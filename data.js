@@ -1,5 +1,5 @@
 ﻿window.DEADLAND_DATA = {
-  fallbackVersion: "0.145.0",
+  fallbackVersion: "0.145.1",
   categories: [
     { id: "all", label: "Все версии" },
     { id: "milestone", label: "Ключевые релизы" },
@@ -13,10 +13,23 @@
   ],
   versions: [
     {
+      version: "0.145.1",
+      type: "patch",
+      current: true,
+      date: "2026-10-16",
+      author: "lerk",
+      title: "Подсказка про разбор мебели только с нужным инструментом",
+      summary: "Подсказка «удерживать F — разобрать» теперь появляется только тогда, когда в руке нужный инструмент.",
+      categories: ["ui","craft"],
+      improvements: [
+        "<strong>Что изменилось:</strong> подсказка про разбор мебели показывается, только если в руке нужный инструмент для этой вещи.",
+        "<strong>Что смотрелось:</strong> кадров нет, в игре глазом пока не смотрелось."
+      ]
+    },
+    {
       version: "0.145.0",
       type: "minor",
       milestone: true,
-      current: true,
       date: "2026-10-16",
       author: "Eksailed",
       title: "Звук и атмосфера: в игре появился звук, две линии игры слиты",
