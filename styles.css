@@ -1,4 +1,4 @@
-/* Deadland: крашеный металл гражданской обороны, сигнальный жёлтый, ржавчина для угроз, хаки для исправленного. */
+/* Deadland: агитплакат. Красное поле, чёрные плиты, тяжёлый узкий шрифт, жёсткие тени. Основа ниже, оформление «Плаката» в конце файла. */
 
 :root {
   color-scheme: dark;
@@ -2621,5 +2621,416 @@ select.input {
 @media (max-width: 640px) {
   .pathmap__step:nth-child(2n)::after {
     display: block;
+  }
+}
+
+/* ============================================================
+   Оформление «Плакат»: перекрывает основу выше
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  --okalina: #efeee9;
+  --bronya: #e2e0d8;
+  --bronya-2: #d3d0c6;
+  --shov: #111111;
+  --shov-2: #111111;
+  --izvest: #111111;
+  --pyl: #3a3a38;
+  --pepel: #62625e;
+  --signal: #d5271c;
+  --signal-text: #c21d13;
+  --signal-ink: #fff6ee;
+  --rust: #d5271c;
+  --rust-text: #c21d13;
+  --khaki: #2f6b3b;
+  --khaki-text: #2a6035;
+  --f-display: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --f-body: "Golos Text", "Segoe UI", sans-serif;
+  --bar-h: 54px;
+  --wrap: 1280px;
+}
+
+body {
+  background: var(--okalina);
+  font-size: 1.04rem;
+}
+body::after {
+  mix-blend-mode: multiply;
+  filter: invert(1);
+  opacity: 0.05;
+}
+code {
+  background: #111;
+  color: #efeee9;
+  padding: 0 0.3em;
+}
+strong {
+  color: #111;
+  font-weight: 700;
+}
+
+/* ---------- Полоса ---------- */
+.bar {
+  background: #111;
+  border-bottom: 0;
+  backdrop-filter: none;
+}
+.bar__mark img {
+  height: 34px;
+}
+.bar__nav a {
+  color: #bdbab0;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bar__nav a:hover,
+.bar__nav a[aria-current="true"] {
+  color: #fff;
+}
+.bar__nav a[aria-current="true"]::after {
+  height: 4px;
+  bottom: -8px;
+  background: var(--signal);
+}
+.bar__ver {
+  color: #bdbab0;
+}
+.lamp {
+  background: var(--signal);
+}
+
+/* ---------- Первый экран: красное поле ---------- */
+.hero {
+  background: var(--signal);
+  min-height: 0;
+  display: block;
+  overflow: hidden;
+  --cover-h: min(44vw, 640px);
+  padding-bottom: 0;
+}
+.hero__scene {
+  position: relative;
+  height: auto;
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+  background: #8f130c;
+}
+.hero__cover {
+  filter: grayscale(1) contrast(1.4) brightness(0.95);
+  mix-blend-mode: multiply;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 3 / 1;
+}
+.hero__scene::after {
+  background: linear-gradient(90deg, rgba(213, 39, 28, 0) 55%, rgba(213, 39, 28, 0.35));
+}
+.hero__in {
+  padding-top: 0;
+  margin-top: -28px;
+  padding-bottom: 8px;
+}
+.hero__place {
+  max-width: none;
+  margin-bottom: 14px;
+  color: #fff6ee;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.hero__lead {
+  color: #fff;
+  font-size: clamp(1.06rem, 1.4vw, 1.22rem);
+  max-width: 56ch;
+  font-weight: 500;
+}
+.hero__actions {
+  margin-top: 22px;
+}
+.hero .btn--signal {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+  box-shadow: 5px 5px 0 #fff;
+}
+.hero .btn--signal:hover {
+  background: #fff;
+  color: #111;
+}
+.hero .btn--ghost {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 5px 5px 0 #111;
+}
+.hero .btn--ghost:hover {
+  background: #fff;
+  color: #111;
+}
+.daycount {
+  background: #111;
+  border-left: 0;
+  backdrop-filter: none;
+  padding: 14px 22px 14px;
+  transform: rotate(2deg);
+  box-shadow: 6px 6px 0 #fff;
+}
+.daycount__label {
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.daycount__num {
+  color: var(--signal);
+  font-weight: 700;
+  font-size: clamp(4.4rem, 8vw, 7rem);
+}
+.daycount__note {
+  color: #bdbab0;
+}
+.hero__brief {
+  background: #111;
+  max-width: none;
+  margin-top: 40px;
+  padding-block: 0;
+}
+.brief {
+  margin: 0;
+  border-top: 0;
+  --izvest: #fff;
+}
+.brief > div {
+  padding-block: 20px 22px;
+}
+.brief > div + div {
+  border-left: 3px solid var(--signal);
+}
+.brief dd {
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+}
+.brief dt {
+  color: #bdbab0;
+}
+.tape {
+  height: 22px;
+  opacity: 1;
+  background: repeating-linear-gradient(-45deg, #111 0 20px, #f2c200 20px 40px);
+}
+
+/* ---------- Кнопки ---------- */
+.btn {
+  border: 3px solid #111;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 0 #111;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.12s ease;
+}
+.btn:hover {
+  border-color: #111;
+  background: #f2c200;
+}
+.btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 #111;
+}
+.btn--signal {
+  background: var(--signal);
+  border-color: #111;
+  color: #fff;
+}
+.btn--signal:hover {
+  background: #111;
+  border-color: #111;
+}
+.btn--ghost {
+  background: #fff;
+  backdrop-filter: none;
+}
+.btn--small {
+  box-shadow: 3px 3px 0 #111;
+}
+
+/* ---------- Разделы: чередование белого и чёрного поля ---------- */
+.sec {
+  padding: clamp(56px, 8vw, 104px) 0 clamp(64px, 9vw, 120px);
+}
+.sec--plate {
+  /* чёрная плита: внутри всё инвертировано через переменные */
+  --okalina: #111;
+  --bronya: #1c1c1b;
+  --bronya-2: #2a2a28;
+  --shov: #4a4944;
+  --shov-2: #6d6b64;
+  --izvest: #f1f0ea;
+  --pyl: #bdbab0;
+  --pepel: #98958b;
+  --signal-text: #ff5a48;
+  --rust-text: #ff5a48;
+  --khaki-text: #8fd19b;
+  background: #111;
+  color: var(--izvest);
+  border: 0;
+  clip-path: polygon(0 24px, 100% 0, 100% calc(100% - 24px), 0 100%);
+  padding-block: clamp(80px, 10vw, 140px);
+  margin-block: -12px;
+}
+.sec--plate strong {
+  color: #fff;
+}
+.sec--plate .btn {
+  box-shadow: 5px 5px 0 var(--signal);
+}
+.sec--plate .btn:active {
+  box-shadow: 0 0 0;
+}
+.sec__head {
+  display: block;
+  position: relative;
+  padding: 0 0 22px;
+  border-bottom: 6px solid currentColor;
+}
+.sec__head h2 {
+  font-weight: 700;
+  font-size: clamp(2.7rem, 10vw, 8.6rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.sec__head p {
+  max-width: 64ch;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: inherit;
+}
+.sub {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.soon__tag {
+  background: var(--signal);
+  color: #fff;
+  border: 0;
+  padding: 3px 12px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+.soon__title {
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  line-height: 0.98;
+}
+.soon__title span {
+  background: var(--signal);
+  color: #fff;
+  padding: 0 0.15em;
+}
+.soon__ideas {
+  background: transparent;
+  border: 3px solid currentColor;
+}
+
+/* Цвета, зашитые в styles.css */
+.points li,
+.inv__role,
+.table td,
+.build p,
+.keys dd,
+.split__text {
+  color: var(--pyl);
+}
+.entry__head:hover .entry__title {
+  color: var(--signal-text);
+}
+.cat:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.frame__img img {
+  filter: grayscale(1) contrast(1.12);
+}
+.frame:hover .frame__img img {
+  filter: none;
+}
+.sec:not(.sec--plate) .slot {
+  background: rgba(17, 17, 17, 0.05);
+}
+.sec:not(.sec--plate) .slot:hover {
+  background: rgba(17, 17, 17, 0.1);
+}
+.sec:not(.sec--plate) .inv__grid,
+.sec:not(.sec--plate) .inv__icon,
+.sec:not(.sec--plate) .gauge__track {
+  background: rgba(17, 17, 17, 0.08);
+}
+.sec:not(.sec--plate) .chip img {
+  background: rgba(17, 17, 17, 0.07);
+}
+.sec:not(.sec--plate) .table tbody tr:hover td {
+  background: rgba(17, 17, 17, 0.05);
+}
+.sec:not(.sec--plate) .cat:hover {
+  background: rgba(17, 17, 17, 0.05);
+}
+.sec:not(.sec--plate) .cat[aria-pressed="true"] {
+  background: rgba(213, 39, 28, 0.1);
+}
+.sec:not(.sec--plate) .slot[aria-pressed="true"] {
+  background: rgba(213, 39, 28, 0.14);
+}
+.cmp__stage,
+.lb__fig img {
+  background: #111;
+}
+.cmp__tag {
+  background: #111;
+  color: #fff;
+}
+.foot {
+  --izvest: #f1f0ea;
+  --pyl: #bdbab0;
+  background: #111;
+  border-top: 0;
+}
+.foot .tape {
+  height: 22px;
+}
+.foot__mark {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
+@media (max-width: 720px) {
+  /* на узком экране логотип рисуется отдельно, обложку с тем же логотипом прячем */
+  .hero__scene {
+    display: none;
+  }
+  .hero__in {
+    margin-top: 0;
+    padding-top: 28px;
+  }
+  .hero__logo {
+    filter: none;
+    width: min(70vw, 300px);
   }
 }
