@@ -250,6 +250,37 @@ strong {
   text-wrap: pretty;
 }
 
+.soon__ideas {
+  max-width: 52ch;
+  margin-top: 28px;
+  padding: 16px 20px 18px;
+  border-left: 3px solid var(--signal);
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.soon__ideas h3 {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.soon__ideas p {
+  margin-top: 8px;
+  color: var(--pyl);
+  text-wrap: pretty;
+}
+
+.soon__ideas code {
+  color: var(--izvest);
+}
+
+.btn--big {
+  min-height: 58px;
+  padding: 0.7em 1.6em;
+  font-size: 1.5rem;
+}
+
 .road {
   list-style: none;
   position: relative;
