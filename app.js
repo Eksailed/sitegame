@@ -687,7 +687,7 @@
     });
   }
 
-  // Нажатие на кнопку бота закрытого теста пишем в Метрику целью tg_test (если счётчик загрузился).
+  // Нажатие на кнопки с data-goal пишем в Метрику целью (если счётчик загрузился).
   function initGoals() {
     document.querySelectorAll("[data-goal]").forEach((el) => {
       el.addEventListener("click", () => {
